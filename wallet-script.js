@@ -7,11 +7,9 @@
     `;
   }
   console.log('App Wallet')
-  window.functionExport = function() {
-    return function() {
-      console.log('functionExport')
-    }
-  }
-  export {functionExport}
-
+  
 })();
+window.functionExport = function() {
+  console.log('functionExport')
+}
+// export {functionExport}
