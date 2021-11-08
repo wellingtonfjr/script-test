@@ -6,17 +6,17 @@ document.getElementsByTagName('head')[0].appendChild(script);
 (function(){
   console.log('App Wallet')
   
-  const closeModalApp = () => {
-
+  closeModalApp = () => {
+    $("#modalAppWallet").remove()
   }
 
   openModal = () => {
     console.log('openModal')
     jQuery("body").append(jQuery(`
-      <div class="modal fade">
+      <div id="modalAppWallet" class="modal fade show">
         <div
-          class="modal-backdrop fade"
-          onClick={closeModalApp}
+          class="modal-backdrop fade show"
+          onClick="closeModalApp()"
           role="dialog"
           tabIndex={-1}
         />
@@ -25,8 +25,8 @@ document.getElementsByTagName('head')[0].appendChild(script);
           <div
             class="modal-header"
           >
-            <h5 class="modal-title">{title}</h5>
-            <button onClick={close} type="button" class="modal-close" aria-label="Close">
+            <h5 class="modal-title">Titulo Modal</h5>
+            <button onClick="closeModalApp()" type="button" class="modal-close" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
