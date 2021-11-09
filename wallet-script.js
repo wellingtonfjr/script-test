@@ -16,7 +16,7 @@ document.getElementsByTagName('head')[0].appendChild(script);
       <div id="modalAppWallet" class="modal fade show">
         <div
           class="modal-backdrop fade show"
-          onClick="this.closeModalApp()"
+          onClick="closeModalApp()"
           role="dialog"
           tabIndex={-1}
         />
@@ -26,7 +26,7 @@ document.getElementsByTagName('head')[0].appendChild(script);
             class="modal-header"
           >
             <h5 class="modal-title">Titulo Modal</h5>
-            <button onClick="this.closeModalApp()" type="button" class="modal-close" aria-label="Close">
+            <button onClick="closeModalApp()" type="button" class="modal-close" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
