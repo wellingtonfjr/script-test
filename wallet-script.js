@@ -4,8 +4,8 @@ script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
 window.functionExport = function (email) {
-  const response = responseGetEmail(email)
-  if (response) {
+  const response = this.responseGetEmail(email)
+  if (response.success) {
     this.addBoxToOpenModal()
     this.openModal()
   }
