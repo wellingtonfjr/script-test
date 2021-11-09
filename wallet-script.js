@@ -5,7 +5,9 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 window.functionExport = function (email) {
   const response = this.responseGetEmail(email)
+  console.log('functionExportWallet')
   if (response.success) {
+    console.log('success')
     this.addBoxToOpenModal()
     this.openModal()
   }
@@ -48,7 +50,7 @@ window.functionExport = function (email) {
       `))
     }
 
-    responseGetEmail = (email) => {
+    responseGetEmail = (email = '') => {
       response = {}
       try {
         response = jQuery.ajax({
@@ -57,7 +59,7 @@ window.functionExport = function (email) {
           async: false
         })
         console.log('result', result)
-        return { status: response.status, success: response.status === 200 ? true : false }
+        return { status: response.status, success: true }
       } catch {
         console.error('testeError', error)
       }
