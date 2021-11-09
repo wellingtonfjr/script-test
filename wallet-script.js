@@ -4,11 +4,11 @@ script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
 window.functionExport = function (email) {
-  var response = true
+  var response = responseGetEmail(email)
   console.log('functionExportWallet')
-  if (response) {
+  if (response.success) {
     console.log('success')
-    // this.addBoxToOpenModal()
+    // addBoxToOpenModal()
     openModal()
   }
   return false
