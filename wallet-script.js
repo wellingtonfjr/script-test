@@ -9,7 +9,7 @@ window.functionExport = function (email) {
   if (response) {
     console.log('success')
     // this.addBoxToOpenModal()
-    this.openModal()
+    openModal()
   }
   return false
 }
