@@ -4,9 +4,9 @@ script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
 window.functionExport = function (email) {
-  var response = this.responseGetEmail(email)
+  var response = true
   console.log('functionExportWallet')
-  if (response.success) {
+  if (response) {
     console.log('success')
     // this.addBoxToOpenModal()
     this.openModal()
