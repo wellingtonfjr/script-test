@@ -476,28 +476,21 @@ __webpack_require__.r(__webpack_exports__);
 var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
-document.getElementsByTagName('head')[0].appendChild(script);
-
-responseGetEmail = (email = '') => {
-  response = {};
-
-  try {
-    response = jQuery.ajax({
-      url: 'demo_test.asp',
-      data: {
-        email
-      },
-      async: false
-    });
-    console.log('result', result);
-    return {
-      status: response.status,
-      success: true
-    };
-  } catch {
-    console.error('testeError', error);
-  }
-}; // window.functionExport = function (email) {
+document.getElementsByTagName('head')[0].appendChild(script); // responseGetEmail = (email = '') => {
+//   response = {}
+//   try {
+//     response = jQuery.ajax({
+//       url: 'demo_test.asp',
+//       data: { email },
+//       async: false
+//     })
+//     console.log('result', result)
+//     return { status: response.status, success: true }
+//   } catch {
+//     console.error('testeError', error)
+//   }
+// }
+// window.functionExport = function (email) {
 //   var response = responseGetEmail(email)
 //   console.log('functionExportWallet')
 //   if (response.success) {
@@ -507,7 +500,6 @@ responseGetEmail = (email = '') => {
 //   }
 //   return false
 // }
-
 
 const renderNext = () => {
   console.log('teste');
