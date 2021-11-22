@@ -497,20 +497,17 @@ responseGetEmail = (email = '') => {
   } catch {
     console.error('testeError', error);
   }
-};
+}; // window.functionExport = function (email) {
+//   var response = responseGetEmail(email)
+//   console.log('functionExportWallet')
+//   if (response.success) {
+//     console.log('success')
+//     // addBoxToOpenModal()
+//     openModal()
+//   }
+//   return false
+// }
 
-window.functionExport = function (email) {
-  var response = responseGetEmail(email);
-  console.log('functionExportWallet');
-
-  if (response.success) {
-    console.log('success'); // addBoxToOpenModal()
-
-    openModal();
-  }
-
-  return false;
-};
 
 const renderNext = () => {
   console.log('teste');
