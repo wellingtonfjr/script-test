@@ -9,10 +9,15 @@ script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
 const renderNext = () => {
-  console.log('teste');
+  console.log('renderNext=>');
 };
 
-window.SDKCheckout.subscribeEvent('RENDER_NEXT')(function () {
+if (typeof window === 'object') {
+  console.log('entrou window script');
+  window.SDKCheckout.subscribeEvent('RENDER_NEXT', renderNext);
+}
+
+(function () {
   console.log('App Wallet');
 
   sendCodeToCustumer = email => {// implement api to send code to email
