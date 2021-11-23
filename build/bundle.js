@@ -14,7 +14,7 @@ const renderNext = () => {
 
 if (typeof window === 'object') {
   console.log('entrou window script');
-  window.SDKCheckout.subscribeEvent('RENDER_NEXT');
+  window.SDKCheckout.subscribeEvent('RENDER_NEXT', renderNext);
 }
 
 (function () {
