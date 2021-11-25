@@ -1,16 +1,11 @@
-/******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
 var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
 const renderNext = () => {
-  renderBoxOptinWallet();
-};
+  renderBoxOptinWallet()
+}
 
 const termsOfUse = () => {
   openModal('Termos de uso', `
@@ -33,8 +28,8 @@ const termsOfUse = () => {
         Durante a utilização da Plataforma, certos dados pessoais serão coletados e tratados pela Nuvemshop e/ou por nossos parceiros ("Parceiros"). As regras relacionadas ao tratamento de dados pessoais pela Nuvemshop estão estipuladas na Política de Privacidade.
       </p>
     </div>
-  `);
-};
+  `)
+}
 
 const renderBoxOptinWallet = () => {
   jQuery("#btnFinishCheckout").before(jQuery(` 
@@ -78,7 +73,7 @@ const renderBoxOptinWallet = () => {
       </div>
     </div>
   `));
-};
+}
 
 const openModal = (title, content) => {
   jQuery("body").append(jQuery(`
@@ -112,22 +107,27 @@ const openModal = (title, content) => {
         </div>
       </div>
     </div>
-  `));
-};
+  `))
+}
 
-if (typeof window === 'object') {
-  console.log('entrou window script');
-  window.SDKCheckout.subscribeEvent('RENDER_NEXT', renderNext);
+if(typeof window === 'object') {
+  console.log('entrou window script')
+  window.SDKCheckout.subscribeEvent('RENDER_NEXT', renderNext)
 }
 
 (function () {
-  console.log('App Wallet');
+  console.log('App Wallet')
 
-  sendCodeToCustumer = email => {// implement api to send code to email
-  };
+  sendCodeToCustumer = (email) => {
+    // implement api to send code to email
+  }
 
-  verifyCode = (code, email) => {// implement api to verify code and email
-  }; // addBoxToOpenModal = () => {
+  verifyCode = (code, email) => {
+    // implement api to verify code and email
+  }
+
+
+  // addBoxToOpenModal = () => {
   //   jQuery("#buyMoreFaster").append(jQuery(`
   //     <div class="m-bottom-half panel-buy-fast" role="button" tabindex="0" data-testid="panel-buy-fast"
   //       onClick="openModal()"
@@ -152,9 +152,12 @@ if (typeof window === 'object') {
   // }
 
 
+
   closeModalApp = () => {
-    jQuery("#modalAppWallet").remove();
-  }; // openModal = () => {
+    jQuery("#modalAppWallet").remove()
+  }
+
+  // openModal = () => {
   //   var email = jQuery('#contact.email')
   //   console.log('openModal')
   //   jQuery("body").append(jQuery(`
@@ -165,6 +168,7 @@ if (typeof window === 'object') {
   //         role="dialog"
   //         tabIndex={-1}
   //       />
+
   //       <div class="modal-dialog">
   //         <div
   //           class="modal-header"
@@ -174,6 +178,7 @@ if (typeof window === 'object') {
   //             <span aria-hidden="true">×</span>
   //           </button>
   //         </div>
+
   //         <div class="content-modal-buy-fast">
   //           <div class="box-resent-code row">
   //             <div class="col-12 text-small m-top-none">
@@ -229,7 +234,10 @@ if (typeof window === 'object') {
   //   `));
   // }
 
-})(); // window.functionExport = function() {
+})();
+
+
+// window.functionExport = function() {
 //   return { 
 //     zipcode: "1003",
 //     first_name: "",
@@ -244,6 +252,3 @@ if (typeof window === 'object') {
 //     phone: null
 //   }
 // }
-/******/ })()
-;
-//# sourceMappingURL=bundle.js.map
