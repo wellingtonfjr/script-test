@@ -94,7 +94,7 @@ renderBoxOptinWallet = () => {
 };
 
 openModal = (title, content) => {
-  console.log('openModal');
+  console.log('openModal=>');
   jQuery("body").append(jQuery(`
     <div id="modalAppWallet" class="modal fade show">
       <div
