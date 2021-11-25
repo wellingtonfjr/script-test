@@ -87,7 +87,7 @@ renderBoxOptinWallet = () => {
           <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" />
         </div>
         <div>Você acessará esta conta através de um código recebido por SMS.</div>
-        <div>Ao salvar, você aceita os <a onClick="(e) => this.termsOfUse(e)" href="#">Termos de uso</a> e <a onClick="(e) => this.privacyPolicy(e)" href="#">Política de privacidade</a>.</div>
+        <div>Ao salvar, você aceita os <a onClick="termsOfUse(e)" href="#">Termos de uso</a> e <a onClick="privacyPolicy(e)" href="#">Política de privacidade</a>.</div>
       </div>
     </div>
   `));
@@ -115,8 +115,9 @@ openModal = (title, content) => {
         </div>
 
         <div class="content-modal">
-          <div class="row">
+          <div class="col-12">
             ${content}
+            </div>
             <div class="col-12">
               <button type="button" id="" class="pull-right text-uppercase m-top-half btn btn-primary" tabindex="0">
                 <span>OK</span>
