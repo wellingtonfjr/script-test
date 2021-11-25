@@ -86,7 +86,7 @@ renderBoxOptinWallet = () => {
           <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" />
         </div>
         <div>Você acessará esta conta através de um código recebido por SMS.</div>
-        <div>Ao salvar, você aceita os <a onClick="termsOfUse()" href="#">Termos de uso</a> e <a onClick="privacyPolicy()" href="#">Política de privacidade</a>.</div>
+        <div>Ao salvar, você aceita os <a onClick="(e) => termsOfUse(e)" href="#">Termos de uso</a> e <a onClick="(e) => privacyPolicy(e)" href="#">Política de privacidade</a>.</div>
       </div>
     </div>
   `));
