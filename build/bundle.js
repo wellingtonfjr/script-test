@@ -14,6 +14,7 @@ renderNext = () => {
 
 termsOfUse = e => {
   e.preventDefault();
+  console.log('termsOfUse');
   openModal('Termos de uso', `
     <div class="col-12">
       <p>
@@ -92,7 +93,8 @@ renderBoxOptinWallet = () => {
   `));
 };
 
-const openModal = (title, content) => {
+openModal = (title, content) => {
+  console.log('openModal');
   jQuery("body").append(jQuery(`
     <div id="modalAppWallet" class="modal fade show">
       <div
