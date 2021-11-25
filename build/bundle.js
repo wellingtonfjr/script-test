@@ -12,6 +12,10 @@ renderNext = () => {
   renderBoxOptinWallet();
 };
 
+finishOrder = (event, data) => {
+  console.log('Request validate Finish order: ', event, 'data: ', data);
+};
+
 termsOfUse = e => {
   e.preventDefault();
   console.log('termsOfUse');
@@ -94,7 +98,7 @@ renderBoxOptinWallet = () => {
 };
 
 openModal = (title, content) => {
-  console.log('openModal=>');
+  console.log('openModal==>');
   jQuery("body").append(jQuery(`
     <div id="modalAppWallet" class="modal fade show">
       <div
@@ -133,6 +137,7 @@ openModal = (title, content) => {
 if (typeof window === 'object') {
   console.log('entrou window script');
   window.SDKCheckout.subscribeEvent('RENDER_NEXT', renderNext);
+  window.SDKCheckout.subscribeEvent('FINISH_ORDER', finishOrder);
 }
 
 (function () {
