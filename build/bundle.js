@@ -14,10 +14,10 @@ const renderNext = () => {
 
 const renderBoxOptinWallet = () => {
   jQuery("#btnFinishCheckout").before(jQuery(` 
-    <div className="panel panel-with-header"
+    <div class="panel panel-with-header"
       style="padding: 0"
     >
-      <div className="menu-title"
+      <div class="menu-title"
         style="padding: 15px; color: "0272D5; display: flex; align-items: center"
       >
         <svg width="103" height="19" viewBox="0 0 100 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,21 +33,21 @@ const renderBoxOptinWallet = () => {
           <path d="M96.4029 12.9649C94.3604 12.9649 92.8057 11.3322 92.8057 9.29074C92.8057 7.24923 94.3604 5.62939 96.4029 5.62939C98.4459 5.62939 100 7.24923 100 9.29074C100 11.3322 98.4459 12.9649 96.4029 12.9649ZM96.4029 6.43131C94.8643 6.43131 93.6824 7.71568 93.6824 9.29074C93.6824 10.8818 94.8615 12.1629 96.4029 12.1629C97.9414 12.1629 99.1239 10.8786 99.1239 9.29074C99.1239 7.71568 97.9414 6.43131 96.4029 6.43131Z" fill="#0272D5"/>
         </svg> <span style="margin-left: 5px">facilita seus próximos pedidos</span>
       </div>
-      <div className="content-wallet-subscribe"
+      <div class="content-wallet-subscribe"
         style="padding: 15px; background: #F9F9F9"
       >
-        <div className="form-group"
+        <div class="form-group"
           style="display: flex; align-items: center"
         >
           <input id="iAcceptWallet" type="checkbox"
             style="display: flex; align-items: center; appearance: auto, display: inline-block"
           />
-          <label className="input-label" id="iAcceptWallet" for="iAcceptWallet">
+          <label class="input-label" id="iAcceptWallet" for="iAcceptWallet">
             Salvar dados de entrega e contato em uma conta
           </label>
         </div>
-        <div className="form-group">
-          <input className="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" />
+        <div class="form-group">
+          <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" />
         </div>
         <div>Você acessará esta conta através de um código recebido por SMS.</div>
         <div>Ao salvar, você aceita os <a onClick="termsOfUse()" href="#">Termos de uso</a> e <a onClick="PrivacyPolicy()" href="#">Política de privacidade</a>.</div>
