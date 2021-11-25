@@ -8,11 +8,12 @@ script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
-const renderNext = () => {
+renderNext = () => {
   renderBoxOptinWallet();
 };
 
-const termsOfUse = () => {
+termsOfUse = e => {
+  e.preventDefault();
   openModal('Termos de uso', `
     <div class="col-12">
       <p>
@@ -36,7 +37,18 @@ const termsOfUse = () => {
   `);
 };
 
-const renderBoxOptinWallet = () => {
+privacyPolicy = e => {
+  e.preventDefault();
+  openModal('Política de Privacidade', `
+    <div class="col-12">
+      <p>
+        Privacidade
+      </p>
+    </div>
+  `);
+};
+
+renderBoxOptinWallet = () => {
   jQuery("#btnFinishCheckout").before(jQuery(` 
     <div class="panel panel-with-header"
       style="padding: 0"
@@ -74,7 +86,7 @@ const renderBoxOptinWallet = () => {
           <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" />
         </div>
         <div>Você acessará esta conta através de um código recebido por SMS.</div>
-        <div>Ao salvar, você aceita os <a onClick="termsOfUse()" href="#">Termos de uso</a> e <a onClick="PrivacyPolicy()" href="#">Política de privacidade</a>.</div>
+        <div>Ao salvar, você aceita os <a onClick="termsOfUse()" href="#">Termos de uso</a> e <a onClick="privacyPolicy()" href="#">Política de privacidade</a>.</div>
       </div>
     </div>
   `));
