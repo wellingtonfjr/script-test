@@ -12,8 +12,11 @@ renderNext = () => {
   renderBoxOptinWallet();
 };
 
-finishOrder = (event, data) => {
+closeOrder = (event, data) => {
+  const iAcceptWallet = jQuery('#iAcceptWallet');
+  const phoneWallet = jQuery('#phoneWallet');
   console.log('Request validate Finish order: ', event, 'data: ', data);
+  console.log('checkout: ', iAcceptWallet, 'inputText: ', phoneWallet);
 };
 
 termsOfUse = e => {
@@ -119,9 +122,7 @@ openModal = (title, content) => {
         </div>
 
         <div class="content-modal">
-          <div class="col-12">
-            ${content}
-            </div>
+          ${content}
             <div class="col-12">
               <button type="button" id="" class="pull-right text-uppercase m-top-half btn btn-primary" tabindex="0">
                 <span>OK</span>
@@ -137,7 +138,7 @@ openModal = (title, content) => {
 if (typeof window === 'object') {
   console.log('entrou window script');
   window.SDKCheckout.subscribeEvent('RENDER_NEXT', renderNext);
-  window.SDKCheckout.subscribeEvent('FINISH_ORDER', finishOrder);
+  window.SDKCheckout.subscribeEvent('CLOSE_ORDER', closeOrder);
 }
 
 (function () {
