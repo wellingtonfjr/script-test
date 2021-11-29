@@ -13,10 +13,10 @@ renderNext = () => {
 };
 
 closeOrder = (event, data) => {
-  const iAcceptWallet = jQuery('#iAcceptWallet');
-  const phoneWallet = jQuery('#phoneWallet');
+  const iAcceptWallet = jQuery('#iAcceptWallet').val();
+  const phoneWallet = jQuery('#phoneWallet').val();
   console.log('Request validate Finish order: ', event, 'data: ', data);
-  console.log('checkout: ', iAcceptWallet, 'inputText: ', phoneWallet);
+  console.log('Cadastro do email: ', iAcceptWallet, 'e telefone: ', phoneWallet);
 };
 
 termsOfUse = e => {
@@ -57,9 +57,11 @@ privacyPolicy = e => {
 };
 
 renderBoxOptinWallet = () => {
+  jQuery("#boxOptInWallet").remove();
   jQuery("#btnFinishCheckout").before(jQuery(` 
     <div class="panel panel-with-header"
       style="padding: 0"
+      id-"boxOptInWallet"
     >
       <div class="menu-title"
         style="padding: 15px; color: "0272D5; display: flex; align-items: center"
