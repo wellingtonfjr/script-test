@@ -125,8 +125,8 @@ openModal = (title, content) => {
 
         <div class="content-modal">
           ${content}
-            <div class="col-12">
-              <button type="button" id="" class="pull-right text-uppercase m-top-half btn btn-primary" tabindex="0">
+            <div class="col-12" style="text-align: right">
+              <button type="button" id="" class="text-uppercase m-top-half m-bottom-half btn btn-primary" tabindex="0">
                 <span>OK</span>
               </button>
             </div>
