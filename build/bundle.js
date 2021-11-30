@@ -63,7 +63,7 @@ renderBoxOptinWallet = () => {
   jQuery("#btnFinishCheckout").before(jQuery(` 
     <div class="panel panel-with-header"
       style="padding: 0"
-      id-"boxOptInWallet"
+      id="boxOptInWallet"
     >
       <div class="menu-title"
         style="padding: 15px; color: "0272D5; display: flex; align-items: center"
