@@ -8,6 +8,13 @@ script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
+if (typeof window === 'object') {
+  console.log('entrou window script');
+  window.SDKCheckout.subscribeEvent('RENDER_NEXT', renderNext);
+  window.SDKCheckout.subscribeEvent('CLOSE_ORDER', closeOrder);
+  phoneLS = window.LS?.cart?.contact?.phone;
+}
+
 renderNext = () => {
   renderBoxOptinWallet();
 };
@@ -95,7 +102,7 @@ renderBoxOptinWallet = () => {
           </label>
         </div>
         <div class="form-group">
-          <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" />
+          <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" value="${phoneLS}" />
         </div>
         <div>Você acessará esta conta através de um código recebido por SMS.</div>
         <div>Ao salvar, você aceita os <a onClick="termsOfUse(event)" href="#">Termos de uso</a> e <a onClick="privacyPolicy(event)" href="#">Política de privacidade</a>.</div>
@@ -139,12 +146,6 @@ openModal = (title, content) => {
     </div>
   `));
 };
-
-if (typeof window === 'object') {
-  console.log('entrou window script');
-  window.SDKCheckout.subscribeEvent('RENDER_NEXT', renderNext);
-  window.SDKCheckout.subscribeEvent('CLOSE_ORDER', closeOrder);
-}
 
 (function () {
   console.log('App Wallet');
