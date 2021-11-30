@@ -57,7 +57,9 @@ privacyPolicy = e => {
 };
 
 renderBoxOptinWallet = () => {
+  console.log('**** Inside render box');
   jQuery("#boxOptInWallet").remove();
+  console.log('**** After remove box');
   jQuery("#btnFinishCheckout").before(jQuery(` 
     <div class="panel panel-with-header"
       style="padding: 0"
