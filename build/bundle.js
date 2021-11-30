@@ -102,6 +102,7 @@ renderBoxOptinWallet = () => {
       </div>
     </div>
   `));
+  console.log('**** End function');
 };
 
 openModal = (title, content) => {
