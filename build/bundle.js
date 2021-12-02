@@ -1,8 +1,12 @@
 /******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
+/***/ (function() {
+
 var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
@@ -30,14 +34,12 @@ if (typeof window === 'object') {
   window.SDKCheckout.subscribeEvent('CLOSE_ORDER', closeOrder);
   window.SDKCheckout.subscribeEvent('RETURN_VALIDATE_PHONE', updateErrorPhone);
   phoneLS = window.LS?.cart?.contact?.phone;
-
-  window.onload = () => {
-    jQuery("#phoneWallet").focusout(function (e) {
-      console.log('focusout');
-      window.SDKCheckout.publishEvent('VALIDATE_PHONE', e.value);
-    });
-  };
 }
+
+validatePhone = phoneValue => {
+  console.log('focusout');
+  window.SDKCheckout.publishEvent('VALIDATE_PHONE', phoneValue);
+};
 
 termsOfUse = e => {
   e.preventDefault();
@@ -131,7 +133,9 @@ renderBoxOptinWallet = () => {
           </label>
         </div>
         <div class="form-group">
-          <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" value="${phoneLS}" />
+          <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" value="${phoneLS}" 
+            onfocusout="validatePhone(${this.value})"
+          />
           <div id="errorPhoneLabel" class="error">
             <div class="alert alert-danger-bagged">
               <span>Telefone incorreto</span>
@@ -305,6 +309,18 @@ openModal = (title, content) => {
 //     phone: null
 //   }
 // }
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = {};
+/******/ 	__webpack_modules__["./src/index.js"]();
+/******/ 	
 /******/ })()
 ;
 //# sourceMappingURL=bundle.js.map
