@@ -1,19 +1,15 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	var __webpack_modules__ = ({
-
-/***/ "./src/index.js":
+var __webpack_exports__ = {};
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/***/ (function() {
-
 var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
 renderNext = () => {
-  this.renderBoxOptinWallet();
+  renderBoxOptinWallet();
 };
 
 closeOrder = (event, data) => {
@@ -23,6 +19,11 @@ closeOrder = (event, data) => {
   console.log('Cadastro do email: ', iAcceptWallet, 'e telefone: ', phoneWallet);
 };
 
+updateErrorPhone = (event, error) => {
+  console.log('validate error', error);
+  jQuery("#errorPhoneLabel").css("display", error ? "block" : "none");
+};
+
 if (typeof window === 'object') {
   console.log('entrou window script');
   window.SDKCheckout.subscribeEvent('RENDER_NEXT', renderNext);
@@ -30,11 +31,6 @@ if (typeof window === 'object') {
   window.SDKCheckout.subscribeEvent('RETURN_VALIDATE_PHONE', updateErrorPhone);
   phoneLS = window.LS?.cart?.contact?.phone;
 }
-
-updateErrorPhone = (event, error) => {
-  console.log('validate error', error);
-  jQuery("#errorPhoneLabel").css("display", error ? "block" : "none");
-};
 
 termsOfUse = e => {
   e.preventDefault();
@@ -300,18 +296,6 @@ openModal = (title, content) => {
 //     phone: null
 //   }
 // }
-
-/***/ })
-
-/******/ 	});
-/************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./src/index.js"]();
-/******/ 	
 /******/ })()
 ;
 //# sourceMappingURL=bundle.js.map
