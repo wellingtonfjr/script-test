@@ -33,6 +33,7 @@ if (typeof window === 'object') {
 }
 
 jQuery("#phoneWallet").focusout(function (e) {
+  console.log('focusout');
   window.SDKCheckout.publishEvent('VALIDATE_PHONE', e.value);
 });
 
