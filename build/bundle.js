@@ -32,6 +32,10 @@ if (typeof window === 'object') {
   phoneLS = window.LS?.cart?.contact?.phone;
 }
 
+jQuery("#phoneWallet").focusout(function (e) {
+  window.SDKCheckout.publishEvent('VALIDATE_PHONE', e.value);
+});
+
 termsOfUse = e => {
   e.preventDefault();
   console.log('termsOfUse');
@@ -124,10 +128,12 @@ renderBoxOptinWallet = () => {
           </label>
         </div>
         <div class="form-group">
-          <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" value="${phoneLS}"
-            onblur="${e => window.SDKCheckout.publishEvent('VALIDATE_PHONE', e.value)}"
-          />
-          <span id="errorPhoneLabel">Telefone incorreto</span>
+          <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" value="${phoneLS}" />
+          <div id="errorPhoneLabel" class="error">
+            <div class="alert alert-danger-bagged">
+              <span>Telefone incorreto</span>
+            </div>
+          </div>
         </div>
         <i style="margin-bottom: 15px; display: block">Você acessará esta conta através de um código recebido por SMS.</i>
         <div>Ao salvar, você aceita os <a onClick="termsOfUse(event)" href="#">Termos de uso</a> e <a onClick="privacyPolicy(event)" href="#">Política de privacidade</a>.</div>
