@@ -30,12 +30,11 @@ if (typeof window === 'object') {
   window.SDKCheckout.subscribeEvent('CLOSE_ORDER', closeOrder);
   window.SDKCheckout.subscribeEvent('RETURN_VALIDATE_PHONE', updateErrorPhone);
   phoneLS = window.LS?.cart?.contact?.phone;
+  jQuery("#phoneWallet").focusout(function (e) {
+    console.log('focusout');
+    window.SDKCheckout.publishEvent('VALIDATE_PHONE', e.value);
+  });
 }
-
-jQuery("#phoneWallet").focusout(function (e) {
-  console.log('focusout');
-  window.SDKCheckout.publishEvent('VALIDATE_PHONE', e.value);
-});
 
 termsOfUse = e => {
   e.preventDefault();
