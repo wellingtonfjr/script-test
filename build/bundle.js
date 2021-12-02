@@ -23,8 +23,14 @@ if (typeof window === 'object') {
   console.log('entrou window script');
   window.SDKCheckout.subscribeEvent('RENDER_NEXT', renderNext);
   window.SDKCheckout.subscribeEvent('CLOSE_ORDER', closeOrder);
+  window.SDKCheckout.subscribeEvent('RETURN_VALIDATE_PHONE', updateErrorPhone);
   phoneLS = window.LS?.cart?.contact?.phone;
 }
+
+updateErrorPhone = (event, error) => {
+  console.log('validate error', error);
+  jQuery("#errorPhoneLabel").css("display", error ? "block" : "none");
+};
 
 termsOfUse = e => {
   e.preventDefault();
@@ -118,7 +124,10 @@ renderBoxOptinWallet = () => {
           </label>
         </div>
         <div class="form-group">
-          <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" value="${phoneLS}" />
+          <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" value="${phoneLS}"
+            onblur="${e => window.SDKCheckout.publishEvent('VALIDATE_PHONE', e.value)}"
+          />
+          <span id="errorPhoneLabel">Telefone incorreto</span>
         </div>
         <i style="margin-bottom: 15px; display: block">Você acessará esta conta através de um código recebido por SMS.</i>
         <div>Ao salvar, você aceita os <a onClick="termsOfUse(event)" href="#">Termos de uso</a> e <a onClick="privacyPolicy(event)" href="#">Política de privacidade</a>.</div>
@@ -152,7 +161,7 @@ openModal = (title, content) => {
         <div class="content-modal">
           ${content}
             <div class="col-12" style="text-align: right">
-              <button type="button" id="" class="text-uppercase m-top-half m-bottom-half btn btn-primary" tabindex="0">
+              <button onClick="closeModalApp()" type="button" id="" class="text-uppercase m-top-half m-bottom-half btn btn-primary" tabindex="0">
                 <span>OK</span>
               </button>
             </div>
