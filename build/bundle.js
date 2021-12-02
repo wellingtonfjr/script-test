@@ -1,12 +1,8 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	var __webpack_modules__ = ({
-
-/***/ "./src/index.js":
+var __webpack_exports__ = {};
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/***/ (function() {
-
 var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
@@ -134,9 +130,9 @@ renderBoxOptinWallet = () => {
         </div>
         <div class="form-group">
           <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" value="${phoneLS}" 
-            onfocusout="validatePhone(${this.value})"
+            onfocusout="validatePhone(this.value)"
           />
-          <div id="errorPhoneLabel" class="error">
+          <div id="errorPhoneLabel" display="none" class="error">
             <div class="alert alert-danger-bagged">
               <span>Telefone incorreto</span>
             </div>
@@ -309,18 +305,6 @@ openModal = (title, content) => {
 //     phone: null
 //   }
 // }
-
-/***/ })
-
-/******/ 	});
-/************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./src/index.js"]();
-/******/ 	
 /******/ })()
 ;
 //# sourceMappingURL=bundle.js.map
