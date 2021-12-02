@@ -1,15 +1,19 @@
 /******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
+/***/ (function() {
+
 var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
 renderNext = () => {
-  renderBoxOptinWallet();
+  this.renderBoxOptinWallet();
 };
 
 closeOrder = (event, data) => {
@@ -296,6 +300,18 @@ openModal = (title, content) => {
 //     phone: null
 //   }
 // }
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = {};
+/******/ 	__webpack_modules__["./src/index.js"]();
+/******/ 	
 /******/ })()
 ;
 //# sourceMappingURL=bundle.js.map
