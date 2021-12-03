@@ -21,7 +21,7 @@ closeOrder = (event, data) => {
 
 updateErrorPhone = (event, error) => {
   console.log('validate error', error);
-  jQuery("#errorPhoneLabel").css("display", error ? "block" : "none");
+  jQuery("#errorPhoneLabel").css("display", error ? "none" : "block");
 };
 
 if (typeof window === 'object') {
@@ -132,7 +132,7 @@ renderBoxOptinWallet = () => {
           <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" value="${phoneLS}" 
             onfocusout="validatePhone(this.value)"
           />
-          <div id="errorPhoneLabel" display="none" class="error">
+          <div id="errorPhoneLabel" style="display: none" class="error">
             <div class="alert alert-danger-bagged">
               <span>Telefone incorreto</span>
             </div>
