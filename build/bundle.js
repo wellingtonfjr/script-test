@@ -13,7 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "renderBoxOptinWallet": () => (/* binding */ renderBoxOptinWallet)
 /* harmony export */ });
 const renderBoxOptinWallet = () => {
-  console.log('testing other file');
+  console.log('testing other file 2');
   jQuery("#boxOptInWallet").remove();
   jQuery("#btnFinishCheckout").before(jQuery(` 
     <div class="panel panel-with-header"
