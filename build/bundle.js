@@ -1,5 +1,4 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/optin.js":
@@ -8,6 +7,7 @@
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "renderBoxOptinWallet": () => (/* binding */ renderBoxOptinWallet)
@@ -130,16 +130,17 @@ var __webpack_exports__ = {};
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _optin_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./optin.js */ "./src/optin.js");
 var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
+const {
+  renderBoxOptinWallet
+} = __webpack_require__(/*! ./optin.js */ "./src/optin.js");
 
 renderNext = () => {
-  (0,_optin_js__WEBPACK_IMPORTED_MODULE_0__.renderBoxOptinWallet)();
+  renderBoxOptinWallet();
 };
 
 closeOrder = (event, data) => {
