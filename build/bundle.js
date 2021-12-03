@@ -19,9 +19,9 @@ closeOrder = (event, data) => {
   console.log('Cadastro do email: ', iAcceptWallet, 'e telefone: ', phoneWallet);
 };
 
-updateErrorPhone = (event, error) => {
-  console.log('validate error', error);
-  jQuery("#errorPhoneLabel").css("display", error ? "none" : "block");
+updateErrorPhone = (event, isValidPhone) => {
+  console.log('validate isValidPhone', isValidPhone);
+  jQuery("#errorPhoneLabel").css("display", isValidPhone ? "none" : "block");
 };
 
 if (typeof window === 'object') {
