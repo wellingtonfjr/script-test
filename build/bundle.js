@@ -77,11 +77,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "renderBoxOptinWallet": () => (/* binding */ renderBoxOptinWallet)
 /* harmony export */ });
-const {
-  termsOfUse,
-  privacyPolicy
-} = __webpack_require__(/*! ./modals-opt-in.js */ "./src/optin/modals-opt-in.js");
+__webpack_require__(/*! ./modals-opt-in.js */ "./src/optin/modals-opt-in.js");
 
+console.log('require direct');
 const renderBoxOptinWallet = () => {
   jQuery("#boxOptInWallet").remove();
   jQuery("#btnFinishCheckout").before(jQuery(` 
