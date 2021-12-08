@@ -1,6 +1,23 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/login/login.js":
+/*!****************************!*\
+  !*** ./src/login/login.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "verifyEmailExistWallet": () => (/* binding */ verifyEmailExistWallet)
+/* harmony export */ });
+const verifyEmailExistWallet = email => {
+  if (email === 'well@teste') window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
+};
+
+/***/ }),
+
 /***/ "./src/optin/modals-opt-in.js":
 /*!************************************!*\
   !*** ./src/optin/modals-opt-in.js ***!
@@ -79,7 +96,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 __webpack_require__(/*! ./modals-opt-in.js */ "./src/optin/modals-opt-in.js");
 
-console.log('require direct');
 const renderBoxOptinWallet = () => {
   jQuery("#boxOptInWallet").remove();
   jQuery("#btnFinishCheckout").before(jQuery(` 
@@ -206,6 +222,10 @@ const {
   renderBoxOptinWallet
 } = __webpack_require__(/*! ./optin/optin */ "./src/optin/optin.js");
 
+const {
+  verifyEmailExistWallet
+} = __webpack_require__(/*! ./login/login */ "./src/login/login.js");
+
 renderNext = () => {
   renderBoxOptinWallet();
 };
@@ -228,7 +248,10 @@ if (typeof window === 'object') {
   phoneLS = window.LS?.cart?.contact?.phone;
 
   window.onload = () => {
-    window.SDKCheckout.publishEvent('BLOCK_VALIDATE_EMAIL');
+    window.SDKCheckout.publishEvent('BLOCK_VALIDATE_EMAIL', true);
+    JQuery("#contact.email").blur(function (event) {
+      verifyEmailExistWallet(event.target.value);
+    });
   };
 }
 
