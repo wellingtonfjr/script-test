@@ -291,12 +291,16 @@ openModal = (title, content) => {
   `));
 };
 
-(function () {
-  console.log('App Wallet');
+registerBlurInputEmail = () => {
   JQuery("input[id='contact.email']").blur(function (event) {
     console.log('inside function');
-    this.verifyEmailExistWallet(event.target.value);
+    verifyEmailExistWallet(event.target.value);
   });
+};
+
+(function () {
+  console.log('App Wallet');
+  registerBlurInputEmail();
 
   sendCodeToCustumer = email => {// implement api to send code to email
   };
