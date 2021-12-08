@@ -13,7 +13,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "verifyEmailExistWallet": () => (/* binding */ verifyEmailExistWallet)
 /* harmony export */ });
 const verifyEmailExistWallet = email => {
-  if (email === 'well@teste') window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
+  console.log('email=>>', email);
+  if (email === 'well@teste.com') window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
 };
 
 /***/ }),
