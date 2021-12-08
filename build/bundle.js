@@ -242,6 +242,13 @@ updateErrorPhone = (event, isValidPhone) => {
   jQuery("#errorPhoneLabel").css("display", isValidPhone ? "none" : "block");
 };
 
+registerBlurInputEmail = email => {
+  console.log('register');
+  verifyEmailExistWallet(email); // JQuery("input[id='contact.email']").blur(function(event){
+  //   console.log('inside function')
+  // });
+};
+
 if (typeof window === 'object') {
   window.SDKCheckout.subscribeEvent('RENDER_NEXT', renderNext);
   window.SDKCheckout.subscribeEvent('CLOSE_ORDER', closeOrder);
@@ -251,6 +258,7 @@ if (typeof window === 'object') {
   window.onload = () => {
     window.SDKCheckout.publishEvent('BLOCK_VALIDATE_EMAIL', true);
     registerBlurInputEmail();
+    document.querySelector("input[id='contact.email']").addEventListener("blur", e => registerBlurInputEmail(e.target.value));
   };
 }
 
@@ -290,14 +298,6 @@ openModal = (title, content) => {
       </div>
     </div>
   `));
-};
-
-registerBlurInputEmail = () => {
-  console.log('register');
-  JQuery("input[id='contact.email']").blur(function (event) {
-    console.log('inside function');
-    verifyEmailExistWallet(event.target.value);
-  });
 };
 
 (function () {
