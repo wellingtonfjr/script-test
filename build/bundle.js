@@ -253,11 +253,6 @@ if (typeof window === 'object') {
   };
 }
 
-JQuery("input[id='contact.email']").blur(function (event) {
-  console.log('blur');
-  verifyEmailExistWallet(event.target.value);
-});
-
 validatePhone = phoneValue => {
   window.SDKCheckout.publishEvent('VALIDATE_PHONE', phoneValue);
 };
@@ -298,6 +293,10 @@ openModal = (title, content) => {
 
 (function () {
   console.log('App Wallet');
+  JQuery("input[id='contact.email']").blur(function (event) {
+    console.log('inside function');
+    this.verifyEmailExistWallet(event.target.value);
+  });
 
   sendCodeToCustumer = email => {// implement api to send code to email
   };
