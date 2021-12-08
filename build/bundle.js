@@ -250,6 +250,7 @@ if (typeof window === 'object') {
 
   window.onload = () => {
     window.SDKCheckout.publishEvent('BLOCK_VALIDATE_EMAIL', true);
+    registerBlurInputEmail();
   };
 }
 
@@ -292,6 +293,7 @@ openModal = (title, content) => {
 };
 
 registerBlurInputEmail = () => {
+  console.log('register');
   JQuery("input[id='contact.email']").blur(function (event) {
     console.log('inside function');
     verifyEmailExistWallet(event.target.value);
@@ -299,8 +301,7 @@ registerBlurInputEmail = () => {
 };
 
 (function () {
-  console.log('App Wallet');
-  registerBlurInputEmail();
+  console.log('App Wallet'); // registerBlurInputEmail()
 
   sendCodeToCustumer = email => {// implement api to send code to email
   };
