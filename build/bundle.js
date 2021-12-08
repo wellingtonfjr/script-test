@@ -250,7 +250,7 @@ if (typeof window === 'object') {
 
   window.onload = () => {
     window.SDKCheckout.publishEvent('BLOCK_VALIDATE_EMAIL', true);
-    JQuery("#contact.email").blur(function (event) {
+    JQuery("input[id='contact.email']").blur(function (event) {
       verifyEmailExistWallet(event.target.value);
     });
   };
