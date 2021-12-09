@@ -14,7 +14,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 const verifyEmailExistWallet = email => {
   console.log('email=>>', email);
-  if (email === 'well@teste.com') window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
+
+  if (email === 'wellingtonfjr@hotmail.com') {
+    window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
+  }
 };
 
 /***/ }),
