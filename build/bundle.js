@@ -17,6 +17,20 @@ const verifyEmailExistWallet = email => {
 
   if (email === 'wellingtonfjr@hotmail.com') {
     window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
+  } else {
+    window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', {
+      zipcode: "31130450",
+      first_name: "Wellington",
+      last_name: "Fernandes Júnior",
+      address: "Rua Conego Santana",
+      number: "1700",
+      floor: null,
+      locality: "Cachoeirinha",
+      city: "Belo Horizonte",
+      state: "Minas Gerais",
+      country: "BR",
+      phone: "+5531985190806"
+    });
   }
 };
 
@@ -412,21 +426,7 @@ openModal = (title, content) => {
   //   `));
   // }
 
-})(); // window.functionExport = function() {
-//   return { 
-//     zipcode: "1003",
-//     first_name: "",
-//     last_name: null,
-//     address: null,
-//     number: null,
-//     floor: null,
-//     locality: null,
-//     city: null,
-//     state: "Capital Federal",
-//     country: "AR",
-//     phone: null
-//   }
-// }
+})();
 })();
 
 /******/ })()
