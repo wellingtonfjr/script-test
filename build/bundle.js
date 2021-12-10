@@ -17,7 +17,7 @@ const verifyEmailExistWallet = email => {
 
   if (email === 'wellingtonfjr@hotmail.com') {
     window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
-  } else {
+  } else if (email) {
     window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', {
       contact_name: "Wellington Fernandes Júnior",
       contact_phone: "+5531985190806",
