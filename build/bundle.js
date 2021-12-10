@@ -19,20 +19,39 @@ const verifyEmailExistWallet = email => {
     window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
   } else {
     window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', {
-      zipcode: "31130450",
-      first_name: "Wellington",
-      last_name: "Fernandes Júnior",
-      address: "Rua Conego Santana",
-      number: "1700",
-      floor: null,
-      locality: "Cachoeirinha",
-      city: "Belo Horizonte",
-      state: "Minas Gerais",
-      country: "BR",
-      phone: "+5531985190806"
+      contact_name: "Wellington Fernandes Júnior",
+      contact_phone: "+5531985190806",
+      contact_accepts_marketing: true,
+      shipping_zipcode: "31130450",
+      shipping_first_name: "Wellington",
+      shipping_last_name: "Fernandes Júnior",
+      shipping_address: "Rua Conego Santana",
+      shipping_number: "1700",
+      shipping_floor: null,
+      shipping_locality: "Cachoeirinha",
+      shipping_city: "Belo Horizonte",
+      shipping_state: "Minas Gerais",
+      shipping_country: "BR",
+      shipping_phone: "+5531985190806",
+      billing_id_number: "",
+      billing_zipcode: "31130450",
+      billing_first_name: "Wellington",
+      billing_last_name: "Fernandes Júnior",
+      billing_address: "Rua Conego Santana",
+      billing_number: "1700",
+      billing_floor: "",
+      billing_locality: "Cachoeirinha",
+      billing_city: "Belo Horizonte",
+      billing_state: "Minas Gerais",
+      billing_country: "BR",
+      billing_phone: "+5531985190806"
     });
   }
-};
+}; // shipping_autocomplete(pin):""
+// shipping_city_autocomplete(pin):""
+// shipping_address_autocomplete(pin):""
+// shipping_locality_autocomplete(pin):""
+// shipping_state_autocomplete(pin):""
 
 /***/ }),
 
