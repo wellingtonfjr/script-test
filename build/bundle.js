@@ -18,11 +18,13 @@ const verifyEmailExistWallet = email => {
   if (email === 'wellingtonfjr@hotmail.com') {
     window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
   } else if (email) {
+    console.log('elseVerify');
     addBoxToOpenModal();
   }
 };
 
 addBoxToOpenModal = () => {
+  console.log('addBoxToOpenModal');
   jQuery("#buyMoreFaster").append(jQuery(`
     <div class="m-bottom-half panel-buy-fast" role="button" tabindex="0" data-testid="panel-buy-fast"
       onClick="openModalLogin()"
@@ -229,40 +231,6 @@ const privacyPolicy = e => {
   `);
 };
 
-openModal = (title, content) => {
-  jQuery("body").append(jQuery(`
-    <div id="modalAppWallet" class="modal fade show">
-      <div
-        class="modal-backdrop fade show"
-        onClick="closeModalApp()"
-        role="dialog"
-        tabIndex={-1}
-      />
-
-      <div class="modal-dialog">
-        <div
-          class="modal-header"
-        >
-          <h5 class="modal-title">${title}</h5>
-          <button onClick="closeModalApp()" type="button" class="modal-close" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-
-        <div class="content-modal">
-          ${content}
-            <div class="col-12" style="text-align: right">
-              <button onClick="closeModalApp()" type="button" id="" class="text-uppercase m-top-half m-bottom-half btn btn-primary" tabindex="0">
-                <span>OK</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  `));
-};
-
 /***/ }),
 
 /***/ "./src/optin/optin.js":
@@ -458,6 +426,40 @@ validatePhone = phoneValue => {
 
   closeModalApp = () => {
     jQuery("#modalAppWallet").remove();
+  };
+
+  openModal = (title, content) => {
+    jQuery("body").append(jQuery(`
+      <div id="modalAppWallet" class="modal fade show">
+        <div
+          class="modal-backdrop fade show"
+          onClick="closeModalApp()"
+          role="dialog"
+          tabIndex={-1}
+        />
+  
+        <div class="modal-dialog">
+          <div
+            class="modal-header"
+          >
+            <h5 class="modal-title">${title}</h5>
+            <button onClick="closeModalApp()" type="button" class="modal-close" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+  
+          <div class="content-modal">
+            ${content}
+              <div class="col-12" style="text-align: right">
+                <button onClick="closeModalApp()" type="button" id="" class="text-uppercase m-top-half m-bottom-half btn btn-primary" tabindex="0">
+                  <span>OK</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `));
   };
 })();
 })();
