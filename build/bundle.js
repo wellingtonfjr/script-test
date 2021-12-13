@@ -12,8 +12,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "verifyEmailExistWallet": () => (/* binding */ verifyEmailExistWallet)
 /* harmony export */ });
-addBoxToOpenModal = () => {
-  console.log('addBoxToOpenModal changed');
+const addBoxToOpenModal = () => {
+  console.log('addBoxToOpenModal');
   jQuery("#buyMoreFaster").append(jQuery(`
     <div class="m-bottom-half panel-buy-fast" role="button" tabindex="0" data-testid="panel-buy-fast"
       onClick="openModalLogin()"
@@ -37,7 +37,7 @@ addBoxToOpenModal = () => {
   `));
 };
 
-validateAccessCode = (email, codeConfirmation) => {
+const validateAccessCode = (email, codeConfirmation) => {
   console.log('email, codeConfirmation', email, codeConfirmation);
 
   if (codeConfirmation === '123') {
@@ -84,7 +84,7 @@ const verifyEmailExistWallet = email => {
   }
 };
 
-openModalLogin = () => {
+const openModalLogin = () => {
   var email = jQuery('#contact.email');
   var codeConfirmation = jQuery('#code_confirmation');
   jQuery("body").append(jQuery(`
