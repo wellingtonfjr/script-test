@@ -12,19 +12,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "verifyEmailExistWallet": () => (/* binding */ verifyEmailExistWallet)
 /* harmony export */ });
-const verifyEmailExistWallet = email => {
-  console.log('email=>>', email);
-
-  if (email === 'wellingtonfjr@hotmail.com') {
-    window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
-  } else if (email) {
-    console.log('elseVerify');
-    addBoxToOpenModal();
-  }
-};
-
 addBoxToOpenModal = () => {
-  console.log('addBoxToOpenModal');
+  console.log('addBoxToOpenModal changed');
   jQuery("#buyMoreFaster").append(jQuery(`
     <div class="m-bottom-half panel-buy-fast" role="button" tabindex="0" data-testid="panel-buy-fast"
       onClick="openModalLogin()"
@@ -81,6 +70,17 @@ validateAccessCode = (email, codeConfirmation) => {
       billing_phone: "+5531985190806"
     };
     window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', userContactInfo);
+  }
+};
+
+const verifyEmailExistWallet = email => {
+  console.log('email=>>', email);
+
+  if (email === 'wellingtonfjr@hotmail.com') {
+    window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
+  } else if (email) {
+    console.log('elseVerify');
+    addBoxToOpenModal();
   }
 };
 
