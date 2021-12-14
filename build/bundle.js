@@ -142,10 +142,10 @@ const openModalLogin = () => {
 };
 
 const addBoxToOpenModal = () => {
-  console.log('addBoxToOpenModal');
+  console.log('addBoxToOpenModalTesting');
   jQuery("#buyMoreFaster").append(jQuery(`
     <div class="m-bottom-half panel-buy-fast" role="button" tabindex="0" data-testid="panel-buy-fast"
-      onClick="openModalLogin()"
+      onClick="this.openModalLogin()"
     >
       <div class="title-container-buy-fast">
         <svg class="svg" width="16px" height="16px" viewBox="0 0 1024 1024">
