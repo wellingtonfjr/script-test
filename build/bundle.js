@@ -383,6 +383,39 @@ renderNext = () => {
 closeOrder = (event, data) => {
   const iAcceptWallet = jQuery('#iAcceptWallet').val();
   const phoneWallet = jQuery('#phoneWallet').val();
+  console.log('data', data);
+
+  if (iAcceptWallet) {
+    console.log('iAcceptWallet');
+    jQuery.ajax({
+      method: 'POST',
+      url: 'http://localhost:4444/users/',
+      data: {
+        "name": "wellington Fernandes Júnior",
+        "email": "wellington@gmail.com",
+        "phone": "31985190806",
+        "tax_id": "1",
+        "address": {
+          "zipcode": "31130450",
+          "first_name": "WEllington",
+          "last_name": "Fernandes Júnior",
+          "address": "Rua Conego Santana",
+          "number": "1700",
+          "floor": "casa",
+          "locality": "Cachoeirinha",
+          "city": "Belo Horizonte",
+          "state": "MG",
+          "country": "BR",
+          "phone": "+5531985190806",
+          "between_streets": "Proximo a casa do zezinho",
+          "reference": "fundos"
+        }
+      }
+    }).done(function (msg) {
+      console.log('data', msg);
+    });
+  }
+
   console.log('Request validate Finish order: ', event, 'data: ', data);
   console.log('Cadastro do email: ', iAcceptWallet, 'e telefone: ', phoneWallet);
 };
