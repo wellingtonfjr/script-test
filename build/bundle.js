@@ -12,7 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "verifyEmailExistWallet": () => (/* binding */ verifyEmailExistWallet)
 /* harmony export */ });
-validateAccessCode = (email, codeConfirmation) => {
+function validateAccessCode(email, codeConfirmation) {
   console.log('email, codeConfirmation', email, codeConfirmation);
 
   if (codeConfirmation === '123') {
@@ -46,9 +46,9 @@ validateAccessCode = (email, codeConfirmation) => {
     };
     window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', userContactInfo);
   }
-};
+}
 
-openModalLogin = () => {
+function openModalLogin() {
   var email = jQuery('#contact.email');
   var codeConfirmation = jQuery('#code_confirmation');
   jQuery("body").append(jQuery(`
@@ -128,9 +128,9 @@ openModalLogin = () => {
       </div>
     </div>
   `));
-};
+}
 
-const addBoxToOpenModal = () => {
+function addBoxToOpenModal() {
   console.log('addBoxToOpenModal');
   jQuery("#buyMoreFaster").append(jQuery(`
     <div class="m-bottom-half panel-buy-fast" role="button" tabindex="0" data-testid="panel-buy-fast"
@@ -153,7 +153,7 @@ const addBoxToOpenModal = () => {
       </div>
     </div>
   `));
-};
+}
 
 const verifyEmailExistWallet = email => {
   console.log('email=>>', email);
