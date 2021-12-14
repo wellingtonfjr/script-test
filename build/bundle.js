@@ -10,11 +10,9 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "validateAccessCode": () => (/* binding */ validateAccessCode),
-/* harmony export */   "verifyEmailExistWallet": () => (/* binding */ verifyEmailExistWallet),
-/* harmony export */   "openModalLogin": () => (/* binding */ openModalLogin)
+/* harmony export */   "verifyEmailExistWallet": () => (/* binding */ verifyEmailExistWallet)
 /* harmony export */ });
-const validateAccessCode = (email, codeConfirmation) => {
+validateAccessCode = (email, codeConfirmation) => {
   console.log('email, codeConfirmation', email, codeConfirmation);
 
   if (codeConfirmation === '123') {
@@ -49,17 +47,8 @@ const validateAccessCode = (email, codeConfirmation) => {
     window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', userContactInfo);
   }
 };
-const verifyEmailExistWallet = email => {
-  console.log('email=>>', email);
 
-  if (email === 'wellingtonfjr@hotmail.com') {
-    window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
-  } else if (email) {
-    console.log('elseVerify');
-    addBoxToOpenModal();
-  }
-};
-const openModalLogin = () => {
+openModalLogin = () => {
   var email = jQuery('#contact.email');
   var codeConfirmation = jQuery('#code_confirmation');
   jQuery("body").append(jQuery(`
@@ -142,10 +131,10 @@ const openModalLogin = () => {
 };
 
 const addBoxToOpenModal = () => {
-  console.log('addBoxToOpenModalTesting');
+  console.log('addBoxToOpenModal');
   jQuery("#buyMoreFaster").append(jQuery(`
     <div class="m-bottom-half panel-buy-fast" role="button" tabindex="0" data-testid="panel-buy-fast"
-      onClick="this.openModalLogin()"
+      onClick="openModalLogin()"
     >
       <div class="title-container-buy-fast">
         <svg class="svg" width="16px" height="16px" viewBox="0 0 1024 1024">
@@ -164,6 +153,17 @@ const addBoxToOpenModal = () => {
       </div>
     </div>
   `));
+};
+
+const verifyEmailExistWallet = email => {
+  console.log('email=>>', email);
+
+  if (email === 'wellingtonfjr@hotmail.com') {
+    window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
+  } else if (email) {
+    console.log('elseVerify');
+    addBoxToOpenModal();
+  }
 };
 
 /***/ }),
@@ -373,9 +373,7 @@ const {
 } = __webpack_require__(/*! ./optin/optin */ "./src/optin/optin.js");
 
 const {
-  verifyEmailExistWallet,
-  openModalLogin,
-  validateAccessCode
+  verifyEmailExistWallet
 } = __webpack_require__(/*! ./login/login */ "./src/login/login.js");
 
 renderNext = () => {
