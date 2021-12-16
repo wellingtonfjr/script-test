@@ -247,6 +247,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./modals-opt-in.js */ "./src/optin/modals-opt-in.js");
 
 const renderBoxOptinWallet = () => {
+  console.log('renderBoxOptinWallet=>');
   jQuery("#boxOptInWallet").remove();
   jQuery("#btnFinishCheckout").before(jQuery(` 
     <div class="panel panel-with-header"
@@ -283,8 +284,8 @@ const renderBoxOptinWallet = () => {
           </label>
         </div>
         <div class="form-group">
-          <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" value="${phoneLS ? phoneLS : ''}" 
-            onfocusout="validatePhone(this.value)" disabled="${phoneLS}"
+          <input class="form-control ${phoneLS ? 'disabled' : ''}" id="phoneWallet" type="text" placeholder="Celular com DDD" value="${phoneLS ? phoneLS : ''}" 
+            onfocusout="validatePhone(this.value)" ${phoneLS ? 'disabled' : ''}
           />
           <div id="errorPhoneLabel" style="display: none" class="error">
             <div class="alert alert-danger-bagged">
@@ -377,6 +378,7 @@ const {
 } = __webpack_require__(/*! ./login/login */ "./src/login/login.js");
 
 renderNext = () => {
+  console.log('renderNext=>');
   renderBoxOptinWallet();
 };
 
