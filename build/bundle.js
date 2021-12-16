@@ -284,7 +284,7 @@ const renderBoxOptinWallet = () => {
         </div>
         <div class="form-group">
           <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" value="${phoneLS ? phoneLS : ''}" 
-            onfocusout="validatePhone(this.value)"
+            onfocusout="validatePhone(this.value)" disabled="${phoneLS}"
           />
           <div id="errorPhoneLabel" style="display: none" class="error">
             <div class="alert alert-danger-bagged">
