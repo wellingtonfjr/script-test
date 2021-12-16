@@ -300,6 +300,45 @@ const renderBoxOptinWallet = () => {
   `));
 };
 
+/***/ }),
+
+/***/ "./src/services/api.js":
+/*!*****************************!*\
+  !*** ./src/services/api.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createdUser": () => (/* binding */ createdUser),
+/* harmony export */   "veifyUserExist": () => (/* binding */ veifyUserExist)
+/* harmony export */ });
+const createdUser = data => {
+  const response = jQuery.ajax({
+    method: 'POST',
+    url: 'http://localhost:4444/users/',
+    data: data,
+    success: function (responseRequest) {
+      console.log('responseRequest', responseRequest);
+      return 'Usuário criado com sucesso';
+    }
+  }).done(function (msg) {
+    console.log('done msg', msg);
+  });
+  return response;
+};
+const veifyUserExist = email => {
+  const response = jQuery.ajax({
+    method: 'GET',
+    url: 'http://localhost:4444/users/',
+    data: data
+  }).done(function (msg) {
+    console.log('data', msg);
+  });
+  console.log('response', response);
+};
+
 /***/ })
 
 /******/ 	});
@@ -377,26 +416,25 @@ const {
   verifyEmailExistWallet
 } = __webpack_require__(/*! ./login/login */ "./src/login/login.js");
 
+const {
+  veifyUserExist,
+  createdUser
+} = __webpack_require__(/*! ./services/api */ "./src/services/api.js");
+
 renderNext = () => {
-  console.log('renderNext=>');
+  console.log('renderNext=>'); // const response = veifyUserExist(window.LS?.cart?.contact?.)
+
   renderBoxOptinWallet();
 };
 
 closeOrder = (event, data) => {
   const isAcceptWallet = jQuery('#isAcceptWallet')[0].checked || false;
   const phoneWallet = jQuery('#phoneWallet').val();
-  console.log('data', data);
-  console.log('isAcceptWallet=>', isAcceptWallet);
+  console.log('closeOrder data=>', data);
 
   if (isAcceptWallet) {
-    console.log('isAcceptWallet INSIDE');
-    jQuery.ajax({
-      method: 'POST',
-      url: 'http://localhost:4444/users/',
-      data: data
-    }).done(function (msg) {
-      console.log('data', msg);
-    });
+    const response = createdUser(data);
+    console.log('response Created', response);
   }
 
   console.log('Cadastro do email: ', isAcceptWallet, 'e telefone: ', phoneWallet);
