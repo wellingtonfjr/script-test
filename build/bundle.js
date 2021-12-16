@@ -275,10 +275,10 @@ const renderBoxOptinWallet = () => {
         <div class="form-group"
           style="display: flex; align-items: center"
         >
-          <input id="iAcceptWallet" type="checkbox"
+          <input id="isAcceptWallet" type="checkbox"
             style="display: flex; align-items: center; appearance: auto"
           />
-          <label class="input-label" id="iAcceptWallet" for="iAcceptWallet">
+          <label class="input-label" id="isAcceptWallet" for="isAcceptWallet">
             Salvar dados de entrega e contato em uma conta
           </label>
         </div>
@@ -381,43 +381,23 @@ renderNext = () => {
 };
 
 closeOrder = (event, data) => {
-  const iAcceptWallet = jQuery('#iAcceptWallet').val();
+  const isAcceptWallet = jQuery('#isAcceptWallet')[0].checked || false;
   const phoneWallet = jQuery('#phoneWallet').val();
   console.log('data', data);
+  console.log('isAcceptWallet=>', isAcceptWallet);
 
-  if (iAcceptWallet) {
-    console.log('iAcceptWallet');
+  if (isAcceptWallet) {
+    console.log('isAcceptWallet INSIDE');
     jQuery.ajax({
       method: 'POST',
       url: 'http://localhost:4444/users/',
-      data: {
-        "name": "wellington Fernandes Júnior",
-        "email": "wellington@gmail.com",
-        "phone": "31985190806",
-        "tax_id": "1",
-        "address": {
-          "zipcode": "31130450",
-          "first_name": "WEllington",
-          "last_name": "Fernandes Júnior",
-          "address": "Rua Conego Santana",
-          "number": "1700",
-          "floor": "casa",
-          "locality": "Cachoeirinha",
-          "city": "Belo Horizonte",
-          "state": "MG",
-          "country": "BR",
-          "phone": "+5531985190806",
-          "between_streets": "Proximo a casa do zezinho",
-          "reference": "fundos"
-        }
-      }
+      data: data
     }).done(function (msg) {
       console.log('data', msg);
     });
   }
 
-  console.log('Request validate Finish order: ', event, 'data: ', data);
-  console.log('Cadastro do email: ', iAcceptWallet, 'e telefone: ', phoneWallet);
+  console.log('Cadastro do email: ', isAcceptWallet, 'e telefone: ', phoneWallet);
 };
 
 updateErrorPhone = (event, isValidPhone) => {
