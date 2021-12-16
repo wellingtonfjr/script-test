@@ -12,7 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "verifyEmailExistWallet": () => (/* binding */ verifyEmailExistWallet)
 /* harmony export */ });
-function validateAccessCode(email, codeConfirmation) {
+validateAccessCode = (email, codeConfirmation) => {
   console.log('email, codeConfirmation', email, codeConfirmation);
 
   if (codeConfirmation === '123') {
@@ -46,11 +46,12 @@ function validateAccessCode(email, codeConfirmation) {
     };
     window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', userContactInfo);
   }
-}
+};
 
-function openModalLogin() {
+openModalLogin = () => {
   var email = jQuery('#contact.email');
   var codeConfirmation = jQuery('#code_confirmation');
+  console.log('teste', email, codeConfirmation);
   jQuery("body").append(jQuery(`
     <div id="modalAppWallet" class="modal fade show">
       <div
@@ -128,13 +129,15 @@ function openModalLogin() {
       </div>
     </div>
   `));
-}
+};
 
 function addBoxToOpenModal() {
   console.log('addBoxToOpenModal');
+  jQuery("#boxBuyMoreFaster").remove();
   jQuery("#buyMoreFaster").append(jQuery(`
     <div class="m-bottom-half panel-buy-fast" role="button" tabindex="0" data-testid="panel-buy-fast"
       onClick="openModalLogin()"
+      id="boxBuyMoreFaster"
     >
       <div class="title-container-buy-fast">
         <svg class="svg" width="16px" height="16px" viewBox="0 0 1024 1024">
