@@ -10,8 +10,128 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "validateAccessCode": () => (/* binding */ validateAccessCode),
+/* harmony export */   "openModalLogin": () => (/* binding */ openModalLogin),
 /* harmony export */   "verifyEmailExistWallet": () => (/* binding */ verifyEmailExistWallet)
 /* harmony export */ });
+const validateAccessCode = (email, codeConfirmation) => {
+  console.log('email, codeConfirmation=>', email, codeConfirmation);
+
+  if (codeConfirmation === '123') {
+    const userContactInfo = {
+      contact_name: "Wellington Fernandes Júnior",
+      contact_phone: "+5531985190806",
+      contact_accepts_marketing: true,
+      shipping_zipcode: "31130450",
+      shipping_first_name: "Wellington",
+      shipping_last_name: "Fernandes Júnior",
+      shipping_address: "Rua Conego Santana",
+      shipping_number: "1700",
+      shipping_floor: null,
+      shipping_locality: "Cachoeirinha",
+      shipping_city: "Belo Horizonte",
+      shipping_state: "Minas Gerais",
+      shipping_country: "BR",
+      shipping_phone: "+5531985190806",
+      billing_id_number: "",
+      billing_zipcode: "31130450",
+      billing_first_name: "Wellington",
+      billing_last_name: "Fernandes Júnior",
+      billing_address: "Rua Conego Santana",
+      billing_number: "1700",
+      billing_floor: "",
+      billing_locality: "Cachoeirinha",
+      billing_city: "Belo Horizonte",
+      billing_state: "Minas Gerais",
+      billing_country: "BR",
+      billing_phone: "+5531985190806"
+    };
+    window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', userContactInfo);
+  }
+};
+const openModalLogin = () => {
+  var email = jQuery("[id|='contact.email']").val();
+  var codeConfirmation = jQuery('#code_confirmation').val();
+  console.log('teste=>', email, codeConfirmation);
+  jQuery("body").append(jQuery(`
+    <div id="modalAppWallet" class="modal fade show">
+      <div
+        class="modal-backdrop fade show"
+        onClick="closeModalApp()"
+        role="dialog"
+        tabIndex={-1}
+      />
+
+      <div class="modal-dialog">
+        <div
+          class="modal-header"
+        >
+          <h5 class="modal-title">Titulo Modal</h5>
+          <button onClick="closeModalApp()" type="button" class="modal-close" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+
+        <div class="content-modal-buy-fast">
+          <div class="box-resent-code row">
+            <div class="col-12 text-small m-top-none">
+              <span class="break-line">
+                Copie y pegue el código de 6 dígitos enviado a <strong>${email}</strong>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-8">
+              <div class="form-group input-lg form-group-error">
+                <div class="has-float-label">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="code_confirmation"
+                    placeholder=" "
+                    autocomplete="on"
+                    autocapitalize="on"
+                    id="code_confirmation"
+                    aria-labelledby="code_confirmation"
+                    value=""
+                  >
+                    <label class="input-label" id="code_confirmation" for="code_confirmation">Código de acceso</label>
+                </div>
+                <div id="errorInputAppWallet" class="error">
+                  <div class="alert alert-danger-bagged">
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="link" id="" class="col-12 col-sm-4 text-small m-top-none btn-resend-code btn btn-link btn-disabled" tabindex="0" disabled="">
+              <span>
+                <svg class="icon-btn-resend-code" width="20px" height="20px" viewBox="0 0 1024 1024">
+                  <path d="M752.869 271.058C683.323 201.511 584.763 161.405 476.389 172.498C319.803 188.285 190.949 315.431 173.456 472.018C149.989 678.951 309.989 853.458 511.803 853.458C647.909 853.458 764.816 773.671 819.429 658.898C833.083 630.311 812.603 597.458 781.029 597.458C765.243 597.458 750.309 605.991 743.483 620.071C695.269 723.751 579.643 789.458 453.349 761.298C358.629 740.391 282.256 663.165 262.203 568.445C226.363 402.898 352.229 256.125 511.803 256.125C582.629 256.125 645.776 285.565 691.856 332.071L627.429 396.498C600.549 423.378 619.323 469.458 657.296 469.458H810.469C833.936 469.458 853.136 450.258 853.136 426.791V273.618C853.136 235.645 807.056 216.445 780.176 243.325L752.869 271.058V271.058Z">
+                  </path>
+                </svg>
+                <div class="text-btn-resend-code">Reenviar código</div>
+              </span>
+            </button>
+          </div>
+          <div class="footer-modal-smart-sign-in-v3">
+            <button
+              type="button"
+              id=""
+              class="pull-right text-uppercase m-top-half btn btn-primary"
+              tabindex="0"
+              data-testid="btnStartSessionLogIn"
+              onClick="validateAccessCode(${email}, ${codeConfirmation})"
+            >
+              <span>Continuar</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `));
+};
+
 function addBoxToOpenModal() {
   console.log('addBoxToOpenModal');
   jQuery("#boxBuyMoreFaster").remove();
@@ -297,7 +417,9 @@ const {
 } = __webpack_require__(/*! ./optin/optin */ "./src/optin/optin.js");
 
 const {
-  verifyEmailExistWallet
+  verifyEmailExistWallet,
+  validateAccessCode,
+  openModalLogin
 } = __webpack_require__(/*! ./login/login */ "./src/login/login.js");
 
 const {
@@ -350,125 +472,6 @@ if (typeof window === 'object') {
 
 validatePhone = phoneValue => {
   window.SDKCheckout.publishEvent('VALIDATE_PHONE', phoneValue);
-};
-
-validateAccessCode = (email, codeConfirmation) => {
-  console.log('email, codeConfirmation=>', email, codeConfirmation);
-
-  if (codeConfirmation === '123') {
-    const userContactInfo = {
-      contact_name: "Wellington Fernandes Júnior",
-      contact_phone: "+5531985190806",
-      contact_accepts_marketing: true,
-      shipping_zipcode: "31130450",
-      shipping_first_name: "Wellington",
-      shipping_last_name: "Fernandes Júnior",
-      shipping_address: "Rua Conego Santana",
-      shipping_number: "1700",
-      shipping_floor: null,
-      shipping_locality: "Cachoeirinha",
-      shipping_city: "Belo Horizonte",
-      shipping_state: "Minas Gerais",
-      shipping_country: "BR",
-      shipping_phone: "+5531985190806",
-      billing_id_number: "",
-      billing_zipcode: "31130450",
-      billing_first_name: "Wellington",
-      billing_last_name: "Fernandes Júnior",
-      billing_address: "Rua Conego Santana",
-      billing_number: "1700",
-      billing_floor: "",
-      billing_locality: "Cachoeirinha",
-      billing_city: "Belo Horizonte",
-      billing_state: "Minas Gerais",
-      billing_country: "BR",
-      billing_phone: "+5531985190806"
-    };
-    window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', userContactInfo);
-  }
-};
-
-openModalLogin = () => {
-  var email = jQuery('#contact.email');
-  var codeConfirmation = jQuery('#code_confirmation');
-  console.log('teste=>', email, codeConfirmation);
-  jQuery("body").append(jQuery(`
-    <div id="modalAppWallet" class="modal fade show">
-      <div
-        class="modal-backdrop fade show"
-        onClick="closeModalApp()"
-        role="dialog"
-        tabIndex={-1}
-      />
-
-      <div class="modal-dialog">
-        <div
-          class="modal-header"
-        >
-          <h5 class="modal-title">Titulo Modal</h5>
-          <button onClick="closeModalApp()" type="button" class="modal-close" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-
-        <div class="content-modal-buy-fast">
-          <div class="box-resent-code row">
-            <div class="col-12 text-small m-top-none">
-              <span class="break-line">
-                Copie y pegue el código de 6 dígitos enviado a <strong>${email}</strong>
-              </span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12 col-sm-8">
-              <div class="form-group input-lg form-group-error">
-                <div class="has-float-label">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="code_confirmation"
-                    placeholder=" "
-                    autocomplete="on"
-                    autocapitalize="on"
-                    id="code_confirmation"
-                    aria-labelledby="code_confirmation"
-                    value=""
-                  >
-                    <label class="input-label" id="code_confirmation" for="code_confirmation">Código de acceso</label>
-                </div>
-                <div id="errorInputAppWallet" class="error">
-                  <div class="alert alert-danger-bagged">
-                    <span></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button type="link" id="" class="col-12 col-sm-4 text-small m-top-none btn-resend-code btn btn-link btn-disabled" tabindex="0" disabled="">
-              <span>
-                <svg class="icon-btn-resend-code" width="20px" height="20px" viewBox="0 0 1024 1024">
-                  <path d="M752.869 271.058C683.323 201.511 584.763 161.405 476.389 172.498C319.803 188.285 190.949 315.431 173.456 472.018C149.989 678.951 309.989 853.458 511.803 853.458C647.909 853.458 764.816 773.671 819.429 658.898C833.083 630.311 812.603 597.458 781.029 597.458C765.243 597.458 750.309 605.991 743.483 620.071C695.269 723.751 579.643 789.458 453.349 761.298C358.629 740.391 282.256 663.165 262.203 568.445C226.363 402.898 352.229 256.125 511.803 256.125C582.629 256.125 645.776 285.565 691.856 332.071L627.429 396.498C600.549 423.378 619.323 469.458 657.296 469.458H810.469C833.936 469.458 853.136 450.258 853.136 426.791V273.618C853.136 235.645 807.056 216.445 780.176 243.325L752.869 271.058V271.058Z">
-                  </path>
-                </svg>
-                <div class="text-btn-resend-code">Reenviar código</div>
-              </span>
-            </button>
-          </div>
-          <div class="footer-modal-smart-sign-in-v3">
-            <button
-              type="button"
-              id=""
-              class="pull-right text-uppercase m-top-half btn btn-primary"
-              tabindex="0"
-              data-testid="btnStartSessionLogIn"
-              onClick="validateAccessCode(${email}, ${codeConfirmation})"
-            >
-              <span>Continuar</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `));
 };
 
 (function () {
