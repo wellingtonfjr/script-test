@@ -297,9 +297,7 @@ const {
 } = __webpack_require__(/*! ./optin/optin */ "./src/optin/optin.js");
 
 const {
-  verifyEmailExistWallet,
-  validateAccessCode,
-  openModalLogin
+  verifyEmailExistWallet
 } = __webpack_require__(/*! ./login/login */ "./src/login/login.js");
 
 const {
