@@ -224,6 +224,7 @@ const veifyUserExist = email => {
   console.log('response', response);
 };
 const getUserById = id => {
+  console.log('enter getUserById');
   const response = jQuery.ajax({
     method: 'GET',
     url: `http://localhost:4444/users/${id}`
@@ -250,11 +251,13 @@ const getUserById = id => {
       ...address
     });
     return {
-      user,
-      ...address
+      code: 200,
+      user: { ...user,
+        ...address
+      }
     };
   });
-  console.log('await finish');
+  console.log('finish getUserById');
 };
 
 /***/ })
@@ -387,15 +390,20 @@ validatePhone = phoneValue => {
 }; // start Login //
 
 
-validateAccessCode = () => {
+validateAccessCode = async () => {
   var email = jQuery("[id|='contact.email']").val();
   var codeConfirmation = jQuery('#code_confirmation').val();
   console.log('email, codeConfirmation====>', email, codeConfirmation);
 
   if (codeConfirmation === '123') {
-    const response = getUserById(4);
+    const response = await getUserById(4);
     console.log('response getUser', response);
-    window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', response);
+
+    if (response.code === 200) {
+      window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', response.user);
+    } else {
+      console.log('error response');
+    }
   }
 };
 
