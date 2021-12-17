@@ -401,7 +401,6 @@ validateAccessCode = () => {
 
 openModalLogin = () => {
   var email = jQuery("[id|='contact.email']").val();
-  console.log('teste=>', email, codeConfirmation);
   jQuery("body").append(jQuery(`
     <div id="modalAppWallet" class="modal fade show">
       <div
