@@ -196,7 +196,8 @@ const renderBoxOptinWallet = () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createdUser": () => (/* binding */ createdUser),
-/* harmony export */   "veifyUserExist": () => (/* binding */ veifyUserExist)
+/* harmony export */   "veifyUserExist": () => (/* binding */ veifyUserExist),
+/* harmony export */   "getUserById": () => (/* binding */ getUserById)
 /* harmony export */ });
 const createdUser = data => {
   const response = jQuery.ajax({
@@ -221,6 +222,39 @@ const veifyUserExist = email => {
     console.log('data', msg);
   });
   console.log('response', response);
+};
+const getUserById = id => {
+  const response = jQuery.ajax({
+    method: 'GET',
+    url: `http://localhost:4444/users/${id}`
+  }).then(function (data) {
+    console.log('data>>>>', data);
+    const keys = ['zipcode', 'first_name', 'last_name', 'address', 'number', 'floor', 'locality', 'city', 'state', 'country', 'phone', 'between_streets', 'reference'];
+    const addresses = response.address;
+    let address = {};
+    let user = {
+      contact_name: response.name,
+      contact_phone: response.phone // contact_accepts_marketing: true,
+
+    };
+    addresses.map(item => {
+      keys.map(key => {
+        address = { ...address,
+          [`${item.type}_${key}`]: `${item[key]}` || null
+        };
+        return true;
+      });
+    });
+    console.log('returned===>', {
+      user,
+      ...address
+    });
+    return {
+      user,
+      ...address
+    };
+  });
+  console.log('await finish');
 };
 
 /***/ })
@@ -301,7 +335,7 @@ const {
 } = __webpack_require__(/*! ./login/login */ "./src/login/login.js");
 
 const {
-  veifyUserExist,
+  getUserById,
   createdUser
 } = __webpack_require__(/*! ./services/api */ "./src/services/api.js");
 
@@ -353,45 +387,20 @@ validatePhone = phoneValue => {
 }; // start Login //
 
 
-validateAccessCode = (email, codeConfirmation) => {
+validateAccessCode = () => {
+  var email = jQuery("[id|='contact.email']").val();
+  var codeConfirmation = jQuery('#code_confirmation').val();
   console.log('email, codeConfirmation====>', email, codeConfirmation);
 
   if (codeConfirmation === '123') {
-    const userContactInfo = {
-      contact_name: "Wellington Fernandes Júnior",
-      contact_phone: "+5531985190806",
-      contact_accepts_marketing: true,
-      shipping_zipcode: "31130450",
-      shipping_first_name: "Wellington",
-      shipping_last_name: "Fernandes Júnior",
-      shipping_address: "Rua Conego Santana",
-      shipping_number: "1700",
-      shipping_floor: null,
-      shipping_locality: "Cachoeirinha",
-      shipping_city: "Belo Horizonte",
-      shipping_state: "Minas Gerais",
-      shipping_country: "BR",
-      shipping_phone: "+5531985190806",
-      billing_id_number: "",
-      billing_zipcode: "31130450",
-      billing_first_name: "Wellington",
-      billing_last_name: "Fernandes Júnior",
-      billing_address: "Rua Conego Santana",
-      billing_number: "1700",
-      billing_floor: "",
-      billing_locality: "Cachoeirinha",
-      billing_city: "Belo Horizonte",
-      billing_state: "Minas Gerais",
-      billing_country: "BR",
-      billing_phone: "+5531985190806"
-    };
-    window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', userContactInfo);
+    const response = getUserById(4);
+    console.log('response getUser', response);
+    window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', response);
   }
 };
 
 openModalLogin = () => {
   var email = jQuery("[id|='contact.email']").val();
-  var codeConfirmation = jQuery('#code_confirmation').val();
   console.log('teste=>', email, codeConfirmation);
   jQuery("body").append(jQuery(`
     <div id="modalAppWallet" class="modal fade show">
@@ -461,7 +470,7 @@ openModalLogin = () => {
               class="pull-right text-uppercase m-top-half btn btn-primary"
               tabindex="0"
               data-testid="btnStartSessionLogIn"
-              onClick="validateAccessCode(${email}, ${codeConfirmation})"
+              onClick="validateAccessCode()"
             >
               <span>Continuar</span>
             </button>
