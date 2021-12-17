@@ -223,41 +223,40 @@ const veifyUserExist = email => {
   });
   console.log('response', response);
 };
-const getUserById = id => {
+const getUserById = async id => {
   console.log('enter getUserById');
-  const response = jQuery.ajax({
+  const response = await jQuery.ajax({
     method: 'GET',
     url: `http://localhost:4444/users/${id}`
-  }).then(function (data) {
-    console.log('data>>>>', data);
-    const keys = ['zipcode', 'first_name', 'last_name', 'address', 'number', 'floor', 'locality', 'city', 'state', 'country', 'phone', 'between_streets', 'reference'];
-    const addresses = response.address;
-    let address = {};
-    let user = {
-      contact_name: response.name,
-      contact_phone: response.phone // contact_accepts_marketing: true,
+  }).then(function (data) {});
+  console.log('data>>>>', response);
+  const keys = ['zipcode', 'first_name', 'last_name', 'address', 'number', 'floor', 'locality', 'city', 'state', 'country', 'phone', 'between_streets', 'reference'];
+  const addresses = response.address;
+  let address = {};
+  let user = {
+    contact_name: response.name,
+    contact_phone: response.phone // contact_accepts_marketing: true,
 
-    };
-    addresses.map(item => {
-      keys.map(key => {
-        address = { ...address,
-          [`${item.type}_${key}`]: `${item[key]}` || null
-        };
-        return true;
-      });
+  };
+  addresses.map(item => {
+    keys.map(key => {
+      address = { ...address,
+        [`${item.type}_${key}`]: `${item[key]}` || null
+      };
+      return true;
     });
-    console.log('returned===>', {
-      user,
-      ...address
-    });
-    return {
-      code: 200,
-      user: { ...user,
-        ...address
-      }
-    };
+  });
+  console.log('returned===>', {
+    user,
+    ...address
   });
   console.log('finish getUserById');
+  return {
+    code: 200,
+    user: { ...user,
+      ...address
+    }
+  };
 };
 
 /***/ })
