@@ -199,6 +199,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "veifyUserExist": () => (/* binding */ veifyUserExist),
 /* harmony export */   "getUserById": () => (/* binding */ getUserById)
 /* harmony export */ });
+const BASE_URL = 'http://localhost:4444/users/';
 const createdUser = data => {
   const response = jQuery.ajax({
     method: 'POST',
@@ -224,18 +225,25 @@ const veifyUserExist = email => {
   console.log('response', response);
 };
 const getUserById = async id => {
-  console.log('enter getUserById');
-  const response = await jQuery.ajax({
-    method: 'GET',
-    url: `http://localhost:4444/users/${id}`
-  }).then(function (data) {});
-  console.log('data>>>>', response);
+  console.log('enter getUserById'); // var request = new Request(`${BASE_URL}${id}`, {
+  //   method: 'GET',
+  //   headers: new Headers()
+  // });
+  // const response = await jQuery.ajax({
+  //   method: 'GET',
+  //   url: `${BASE_URL}${id}`,
+  // }).then(function(data) {
+  // });
+
+  const response = await fetch(`${BASE_URL}${id}`);
+  const data = await response.json();
+  console.log('data>>>>', data);
   const keys = ['zipcode', 'first_name', 'last_name', 'address', 'number', 'floor', 'locality', 'city', 'state', 'country', 'phone', 'between_streets', 'reference'];
-  const addresses = response.address;
+  const addresses = data.address;
   let address = {};
   let user = {
-    contact_name: response.name,
-    contact_phone: response.phone // contact_accepts_marketing: true,
+    contact_name: data.name,
+    contact_phone: data.phone // contact_accepts_marketing: true,
 
   };
   addresses.map(item => {
