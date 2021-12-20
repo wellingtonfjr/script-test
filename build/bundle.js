@@ -232,11 +232,11 @@ const getUserById = async id => {
   });
   console.log('response>>>>', response);
   const keys = ['zipcode', 'first_name', 'last_name', 'address', 'number', 'floor', 'locality', 'city', 'state', 'country', 'phone', 'between_streets', 'reference'];
-  const addresses = data.address;
+  const addresses = response.address;
   let address = {};
   let user = {
-    contact_name: data.name,
-    contact_phone: data.phone // contact_accepts_marketing: true,
+    contact_name: response.name,
+    contact_phone: response.phone // contact_accepts_marketing: true,
 
   };
   addresses.map(item => {
