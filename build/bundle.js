@@ -12,6 +12,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "verifyEmailExistWallet": () => (/* binding */ verifyEmailExistWallet)
 /* harmony export */ });
+/* harmony import */ var _services_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/api */ "./src/services/api.js");
+
+
 function addBoxToOpenModal() {
   console.log('addBoxToOpenModal');
   jQuery("#boxBuyMoreFaster").remove();
@@ -39,8 +42,18 @@ function addBoxToOpenModal() {
   `));
 }
 
-const verifyEmailExistWallet = email => {
-  console.log('email=>>', email);
+const verifyEmailExistWallet = async email => {
+  console.log('email====>>', email); // const response = await veifyUserExist(email)
+
+  const response = await jQuery.ajax({
+    method: 'GET',
+    url: `${BASE_URL}/registered?email=${email}`,
+    data: data
+  }).done(function (msg) {
+    console.log('data', msg);
+  });
+  console.log('veifyUserExist response===>', response);
+  console.log('after validate email response=> ', response);
 
   if (email === 'wellingtonfjr@hotmail.com') {
     window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
@@ -199,7 +212,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "veifyUserExist": () => (/* binding */ veifyUserExist),
 /* harmony export */   "getUserById": () => (/* binding */ getUserById)
 /* harmony export */ });
-const BASE_URL = 'http://localhost:4444/users/';
+const BASE_URL = 'http://localhost:4444/users';
 const createdUser = data => {
   const response = jQuery.ajax({
     method: 'POST',
@@ -217,12 +230,12 @@ const createdUser = data => {
 const veifyUserExist = email => {
   const response = jQuery.ajax({
     method: 'GET',
-    url: 'http://localhost:4444/users/',
+    url: `${BASE_URL}/registered?email=${email}`,
     data: data
   }).done(function (msg) {
     console.log('data', msg);
   });
-  console.log('response', response);
+  console.log('veifyUserExist response===>', response);
 };
 const getUserById = async id => {
   console.log('enter getUserById2');
@@ -233,7 +246,7 @@ const getUserById = async id => {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     dataType: "application/json",
-    url: `${BASE_URL}${id}`
+    url: `${BASE_URL}/${id}`
   });
   console.log('response>>>>', response);
   const keys = ['zipcode', 'first_name', 'last_name', 'address', 'number', 'floor', 'locality', 'city', 'state', 'country', 'phone', 'between_streets', 'reference'];
@@ -402,7 +415,7 @@ validateAccessCode = async () => {
 
   if (codeConfirmation === '123') {
     const response = await getUserById(4);
-    console.log('response getUser', response);
+    console.log('response getUser', response); // Controller Error CodeConfirmation errorCodeAppWallet
 
     if (response.code === 200) {
       window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', response.user);
@@ -443,7 +456,7 @@ openModalLogin = () => {
           </div>
           <div class="row">
             <div class="col-12 col-sm-8">
-              <div class="form-group input-lg form-group-error">
+              <div class="form-group input-lg">
                 <div class="has-float-label">
                   <input
                     type="text"
@@ -458,10 +471,11 @@ openModalLogin = () => {
                   >
                     <label class="input-label" id="code_confirmation" for="code_confirmation">Código de acceso</label>
                 </div>
-                <div id="errorInputAppWallet" class="error">
-                  <div class="alert alert-danger-bagged">
-                    <span></span>
-                  </div>
+              </div>
+
+              <div id="errorCodeAppWallet" class="error col-12">
+                <div class="alert alert-danger-bagged">
+                  <span></span>
                 </div>
               </div>
             </div>
