@@ -42,11 +42,8 @@ function addBoxToOpenModal() {
   `));
 }
 
-const verifyEmailExistWallet = async email => {
-  console.log('BASE_URL*====>>', _services_api__WEBPACK_IMPORTED_MODULE_0__.BASE_URL);
-  if (!email) return false; // const response = await veifyUserExist(email)
-
-  const response = await Promise.resolve(jQuery.ajax({
+function resolvePromisse() {
+  return new Promise.resolve(jQuery.ajax({
     method: 'GET',
     url: `${_services_api__WEBPACK_IMPORTED_MODULE_0__.BASE_URL}/registered?email=${email}`,
     crossDomain: true,
@@ -58,6 +55,13 @@ const verifyEmailExistWallet = async email => {
     console.log('data', data);
     return data;
   });
+}
+
+const verifyEmailExistWallet = async email => {
+  console.log('BASE_URL*====>>', _services_api__WEBPACK_IMPORTED_MODULE_0__.BASE_URL);
+  if (!email) return false; // const response = await veifyUserExist(email)
+
+  let response = await resolvePromisse();
   console.log('veifyUserExist response===>', response);
   console.log('after validate email response=> ', response);
 
