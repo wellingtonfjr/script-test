@@ -43,13 +43,16 @@ function addBoxToOpenModal() {
 }
 
 const verifyEmailExistWallet = async email => {
-  console.log('BASE_URL====>>', _services_api__WEBPACK_IMPORTED_MODULE_0__.BASE_URL); // const response = await veifyUserExist(email)
+  console.log('BASE_URL*====>>', _services_api__WEBPACK_IMPORTED_MODULE_0__.BASE_URL);
+  if (!email) return false; // const response = await veifyUserExist(email)
 
   const response = await jQuery.ajax({
     method: 'GET',
     url: `${_services_api__WEBPACK_IMPORTED_MODULE_0__.BASE_URL}/registered?email=${email}`,
+    crossDomain: true,
+    dataType: 'jsonp',
     headers: {
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': 'http://localhost:4444/users/registered'
     }
   }).done(function (msg) {
     console.log('data', msg);
