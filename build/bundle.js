@@ -43,7 +43,7 @@ function addBoxToOpenModal() {
 }
 
 function resolvePromisse(email) {
-  return new Promise.resolve(jQuery.ajax({
+  return Promise.resolve(jQuery.ajax({
     method: 'GET',
     url: `${_services_api__WEBPACK_IMPORTED_MODULE_0__.BASE_URL}/registered?email=${email}`,
     crossDomain: true,
