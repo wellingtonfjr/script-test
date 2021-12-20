@@ -43,11 +43,11 @@ function addBoxToOpenModal() {
 }
 
 const verifyEmailExistWallet = async email => {
-  console.log('email====>>', email); // const response = await veifyUserExist(email)
+  console.log('BASE_URL====>>', _services_api__WEBPACK_IMPORTED_MODULE_0__.BASE_URL); // const response = await veifyUserExist(email)
 
   const response = await jQuery.ajax({
     method: 'GET',
-    url: `${BASE_URL}/registered?email=${email}`,
+    url: `${_services_api__WEBPACK_IMPORTED_MODULE_0__.BASE_URL}/registered?email=${email}`,
     data: data
   }).done(function (msg) {
     console.log('data', msg);
@@ -208,6 +208,7 @@ const renderBoxOptinWallet = () => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "BASE_URL": () => (/* binding */ BASE_URL),
 /* harmony export */   "createdUser": () => (/* binding */ createdUser),
 /* harmony export */   "veifyUserExist": () => (/* binding */ veifyUserExist),
 /* harmony export */   "getUserById": () => (/* binding */ getUserById)
