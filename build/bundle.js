@@ -12078,6 +12078,13 @@ function resolvePromisse(email) {
     dataType: 'jsonp',
     headers: {
       'Access-Control-Allow-Origin': 'http://localhost:4444/users/registered'
+    },
+    success: function (data) {
+      console.log('success', data);
+      return data;
+    },
+    error: function () {
+      alert('Error occured');
     }
   });
 }
