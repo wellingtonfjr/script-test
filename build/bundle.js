@@ -226,8 +226,13 @@ const veifyUserExist = email => {
 };
 const getUserById = async id => {
   console.log('enter getUserById2');
+  jQuery.support.cors = true;
   const response = await jQuery.ajax({
     method: 'GET',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    dataType: "application/json",
     url: `${BASE_URL}${id}`
   });
   console.log('response>>>>', response);
