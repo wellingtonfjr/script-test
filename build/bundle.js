@@ -225,7 +225,7 @@ const veifyUserExist = email => {
   console.log('response', response);
 };
 const getUserById = async id => {
-  console.log('enter getUserById'); // var request = new Request(`${BASE_URL}${id}`, {
+  console.log('enter getUserById2'); // var request = new Request(`${BASE_URL}${id}`, {
   //   method: 'GET',
   //   headers: new Headers()
   // });
