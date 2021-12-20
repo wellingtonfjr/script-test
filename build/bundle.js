@@ -235,8 +235,7 @@ const getUserById = async id => {
   // }).then(function(data) {
   // });
 
-  const response = await fetch(`${BASE_URL}${id}`);
-  const data = await response.json();
+  const data = await fetch(`${BASE_URL}${id}`).then(response => response.json());
   console.log('data>>>>', data);
   const keys = ['zipcode', 'first_name', 'last_name', 'address', 'number', 'floor', 'locality', 'city', 'state', 'country', 'phone', 'between_streets', 'reference'];
   const addresses = data.address;
