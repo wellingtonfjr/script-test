@@ -12075,16 +12075,19 @@ function resolvePromisse(email) {
     method: 'GET',
     url: `${_services_api__WEBPACK_IMPORTED_MODULE_0__.BASE_URL}/registered?email=${email}`,
     crossDomain: true,
-    dataType: 'jsonp',
     headers: {
-      'Access-Control-Allow-Origin': 'http://localhost:4444/users/registered'
+      'Access-Control-Allow-Origin': 'http://localhost:4444/',
+      'Access-Control-Allow-Credentials': true,
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET',
+      'Access-Control-Allow-Headers': 'application/json'
     },
     success: function (data) {
       console.log('success', data);
       return data;
     },
-    error: function () {
-      alert('Error occured');
+    error: function (error) {
+      console.log('Error occured', error);
     }
   });
 }
@@ -12109,7 +12112,7 @@ const verifyEmailExistWallet = async email => {
     //     return data
     //   });
 
-    console.log('veifyUserExist response===>', response);
+    console.log('veifyUserExist BURNÃO CARAI===>', response);
 
     if (email === 'wellingtonfjr@hotmail.com') {
       window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
