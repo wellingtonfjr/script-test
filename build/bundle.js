@@ -47,7 +47,10 @@ const verifyEmailExistWallet = async email => {
 
   const response = await jQuery.ajax({
     method: 'GET',
-    url: `${_services_api__WEBPACK_IMPORTED_MODULE_0__.BASE_URL}/registered?email=${email}`
+    url: `${_services_api__WEBPACK_IMPORTED_MODULE_0__.BASE_URL}/registered?email=${email}`,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    }
   }).done(function (msg) {
     console.log('data', msg);
   });
