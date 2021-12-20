@@ -225,18 +225,12 @@ const veifyUserExist = email => {
   console.log('response', response);
 };
 const getUserById = async id => {
-  console.log('enter getUserById2'); // var request = new Request(`${BASE_URL}${id}`, {
-  //   method: 'GET',
-  //   headers: new Headers()
-  // });
-  // const response = await jQuery.ajax({
-  //   method: 'GET',
-  //   url: `${BASE_URL}${id}`,
-  // }).then(function(data) {
-  // });
-
-  const data = await fetch(`${BASE_URL}${id}`).then(response => response.json());
-  console.log('data>>>>', data);
+  console.log('enter getUserById2');
+  const response = await jQuery.ajax({
+    method: 'GET',
+    url: `${BASE_URL}${id}`
+  });
+  console.log('response>>>>', response);
   const keys = ['zipcode', 'first_name', 'last_name', 'address', 'number', 'floor', 'locality', 'city', 'state', 'country', 'phone', 'between_streets', 'reference'];
   const addresses = data.address;
   let address = {};
