@@ -47,8 +47,7 @@ const verifyEmailExistWallet = async email => {
 
   const response = await jQuery.ajax({
     method: 'GET',
-    url: `${_services_api__WEBPACK_IMPORTED_MODULE_0__.BASE_URL}/registered?email=${email}`,
-    data: data
+    url: `${_services_api__WEBPACK_IMPORTED_MODULE_0__.BASE_URL}/registered?email=${email}`
   }).done(function (msg) {
     console.log('data', msg);
   });
@@ -231,8 +230,7 @@ const createdUser = data => {
 const veifyUserExist = email => {
   const response = jQuery.ajax({
     method: 'GET',
-    url: `${BASE_URL}/registered?email=${email}`,
-    data: data
+    url: `${BASE_URL}/registered?email=${email}`
   }).done(function (msg) {
     console.log('data', msg);
   });
