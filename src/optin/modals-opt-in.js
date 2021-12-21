@@ -24,7 +24,6 @@ export const termsOfUse = (e) => {
   `)
 }
 
-
 export const privacyPolicy = (e) => {
   e.preventDefault()
   openModal('Política de Privacidade', `

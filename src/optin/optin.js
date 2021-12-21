@@ -1,6 +1,7 @@
-const { termsOfUse, privacyPolicy } = require('./optin/modals-opt-in.js')
+require('./modals-opt-in.js')
 
 export const renderBoxOptinWallet = () => {
+  console.log('renderBoxOptinWallet=>')
   jQuery("#boxOptInWallet").remove();
   jQuery("#btnFinishCheckout").before(jQuery(` 
     <div class="panel panel-with-header"
@@ -29,16 +30,16 @@ export const renderBoxOptinWallet = () => {
         <div class="form-group"
           style="display: flex; align-items: center"
         >
-          <input id="iAcceptWallet" type="checkbox"
+          <input id="isAcceptWallet" type="checkbox"
             style="display: flex; align-items: center; appearance: auto"
           />
-          <label class="input-label" id="iAcceptWallet" for="iAcceptWallet">
+          <label class="input-label" id="isAcceptWallet" for="isAcceptWallet">
             Salvar dados de entrega e contato em uma conta
           </label>
         </div>
         <div class="form-group">
-          <input class="form-control" id="phoneWallet" type="text" placeholder="Celular com DDD" value="${phoneLS ? phoneLS : ''}" 
-            onfocusout="validatePhone(this.value)"
+          <input class="form-control ${phoneLS ? 'disabled' : ''}" id="phoneWallet" type="text" placeholder="Celular com DDD" value="${phoneLS ? phoneLS : ''}" 
+            onfocusout="validatePhone(this.value)" ${phoneLS ? 'disabled' : ''}
           />
           <div id="errorPhoneLabel" style="display: none" class="error">
             <div class="alert alert-danger-bagged">
