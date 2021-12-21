@@ -470,11 +470,7 @@ validateAccessCode = async () => {
   var email = jQuery("[id|='contact.email']").val();
   var codeConfirmation = jQuery('#code_confirmation').val();
   console.log('email, codeConfirmation====>', email, codeConfirmation);
-  const responseAuthToken = await authToken({
-    email: email,
-    otp: codeConfirmation,
-    "customer_data": true
-  });
+  const responseAuthToken = await authToken(email, codeConfirmation);
 
   if (responseAuthToken?.user) {
     const user = mountUser(responseAuthToken?.user);
