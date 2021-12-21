@@ -40,33 +40,17 @@ function addBoxToOpenModal() {
       </div>
     </div>
   `));
-} // function resolvePromisse(email) {
-//   return jQuery.ajax({
-//     method: 'GET',
-//     url: `${BASE_URL}/registered?email=${email}`,
-//     success: function(data) {
-//       console.log('success', data)
-//       return data;
-//     },
-//     error: function(error) {
-//       console.log('Error occured', error);
-//     }
-//   })
-// }
-
+}
 
 const verifyEmailExistWallet = async email => {
-  console.log('BASE_URL*====>>', _services_api__WEBPACK_IMPORTED_MODULE_0__.BASE_URL);
   if (!email) return false;
 
   try {
     let response = await (0,_services_api__WEBPACK_IMPORTED_MODULE_0__.veifyUserExist)(email);
-    console.log('veifyUserExist response===>', response);
 
     if (!response?.registered_email) {
       window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
     } else if (email) {
-      console.log('elseVerify');
       addBoxToOpenModal();
     }
   } catch (err) {
@@ -222,13 +206,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "BASE_URL": () => (/* binding */ BASE_URL),
 /* harmony export */   "createdUser": () => (/* binding */ createdUser),
 /* harmony export */   "veifyUserExist": () => (/* binding */ veifyUserExist),
+/* harmony export */   "sendToken": () => (/* binding */ sendToken),
+/* harmony export */   "authToken": () => (/* binding */ authToken),
+/* harmony export */   "authLogin": () => (/* binding */ authLogin),
 /* harmony export */   "getUserById": () => (/* binding */ getUserById)
 /* harmony export */ });
-const BASE_URL = 'http://localhost:4444/users';
+const BASE_URL = 'http://localhost:4444';
 const createdUser = data => {
   const response = jQuery.ajax({
     method: 'POST',
-    url: 'http://localhost:4444/users/',
+    url: `${BASE_URL}/users`,
     data: data,
     success: function (responseRequest) {
       console.log('responseRequest', responseRequest);
@@ -242,7 +229,7 @@ const createdUser = data => {
 const veifyUserExist = email => {
   return jQuery.ajax({
     method: 'GET',
-    url: `${BASE_URL}/registered?email=${email}`,
+    url: `${BASE_URL}/users/registered?email=${email}`,
     success: function (data) {
       console.log('success', data);
       return data;
@@ -253,6 +240,41 @@ const veifyUserExist = email => {
     }
   });
 };
+const sendToken = email => {
+  const response = jQuery.ajax({
+    method: 'POST',
+    url: `${BASE_URL}/auth/send-token`,
+    data: {
+      email: email
+    },
+    success: function (responseSendToken) {
+      console.log('responseSendToken', responseSendToken);
+      console.log('Token Criado com sucesso');
+    }
+  }).done(function (msg) {
+    console.log('done msg', msg);
+  });
+  return response;
+};
+const authToken = (email, token) => {
+  const response = jQuery.ajax({
+    method: 'POST',
+    url: `${BASE_URL}/auth/login`,
+    data: {
+      email: email,
+      otp: token,
+      'customer_data': true
+    },
+    success: function (responseSendToken) {
+      console.log('Login concluído');
+      return responseSendToken.user;
+    }
+  }).done(function (msg) {
+    console.log('done msg', msg);
+  });
+  return response;
+};
+const authLogin = () => {};
 const getUserById = async id => {
   console.log('enter getUserById2');
   jQuery.support.cors = true;
@@ -373,7 +395,8 @@ const {
 
 const {
   getUserById,
-  createdUser
+  createdUser,
+  sendToken
 } = __webpack_require__(/*! ./services/api */ "./src/services/api.js");
 
 renderNext = () => {
@@ -400,10 +423,7 @@ updateErrorPhone = (event, isValidPhone) => {
 };
 
 registerBlurInputEmail = email => {
-  console.log('register');
-  verifyEmailExistWallet(email); // JQuery("input[id='contact.email']").blur(function(event){
-  //   console.log('inside function')
-  // });
+  verifyEmailExistWallet(email);
 };
 
 if (typeof window === 'object') {
@@ -424,25 +444,60 @@ validatePhone = phoneValue => {
 }; // start Login //
 
 
+mountUser = userResponse => {
+  const keys = ['zipcode', 'first_name', 'last_name', 'address', 'number', 'floor', 'locality', 'city', 'state', 'country', 'phone', 'between_streets', 'reference'];
+  const addresses = userResponse.address;
+  let address = {};
+  let user = {
+    contact_name: userResponse.name,
+    contact_phone: userResponse.phone // contact_accepts_marketing: true,
+
+  };
+  addresses.map(item => {
+    keys.map(key => {
+      address = { ...address,
+        [`${item.type}_${key}`]: `${item[key]}` || null
+      };
+      return true;
+    });
+  });
+  console.log('returned===>', {
+    user,
+    ...address
+  });
+  console.log('finish getUserById');
+  return { ...user,
+    ...address
+  };
+};
+
 validateAccessCode = async () => {
   var email = jQuery("[id|='contact.email']").val();
   var codeConfirmation = jQuery('#code_confirmation').val();
   console.log('email, codeConfirmation====>', email, codeConfirmation);
+  const responseAuthToken = await authToken({
+    email: email,
+    otp: codeConfirmation,
+    "customer_data": true
+  });
 
-  if (codeConfirmation === '123') {
-    const response = await getUserById(4);
-    console.log('response getUser', response); // Controller Error CodeConfirmation errorCodeAppWallet
+  if (responseAuthToken?.user) {
+    const user = mountUser(responseAuthToken?.user);
+    console.log('response getUser', user); // Controller Error CodeConfirmation errorCodeAppWallet
 
-    if (response.code === 200) {
-      window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', response.user);
+    if (responseAuthToken.status === 200) {
+      window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', user);
     } else {
       console.log('error response');
     }
+  } else {
+    console.log('not Auth Token', responseAuthToken);
   }
 };
 
 openModalLogin = () => {
   var email = jQuery("[id|='contact.email']").val();
+  sendToken(email);
   jQuery("body").append(jQuery(`
     <div id="modalAppWallet" class="modal fade show">
       <div
@@ -495,15 +550,15 @@ openModalLogin = () => {
                 </div>
               </div>
             </div>
-            <button type="link" id="" class="col-12 col-sm-4 text-small m-top-none btn-resend-code btn btn-link btn-disabled" tabindex="0" disabled="">
-              <span>
-                <svg class="icon-btn-resend-code" width="20px" height="20px" viewBox="0 0 1024 1024">
-                  <path d="M752.869 271.058C683.323 201.511 584.763 161.405 476.389 172.498C319.803 188.285 190.949 315.431 173.456 472.018C149.989 678.951 309.989 853.458 511.803 853.458C647.909 853.458 764.816 773.671 819.429 658.898C833.083 630.311 812.603 597.458 781.029 597.458C765.243 597.458 750.309 605.991 743.483 620.071C695.269 723.751 579.643 789.458 453.349 761.298C358.629 740.391 282.256 663.165 262.203 568.445C226.363 402.898 352.229 256.125 511.803 256.125C582.629 256.125 645.776 285.565 691.856 332.071L627.429 396.498C600.549 423.378 619.323 469.458 657.296 469.458H810.469C833.936 469.458 853.136 450.258 853.136 426.791V273.618C853.136 235.645 807.056 216.445 780.176 243.325L752.869 271.058V271.058Z">
-                  </path>
-                </svg>
-                <div class="text-btn-resend-code">Reenviar código</div>
-              </span>
-            </button>
+            // <button type="link" id="" class="col-12 col-sm-4 text-small m-top-none btn-resend-code btn btn-link btn-disabled" tabindex="0" disabled="">
+            //   <span>
+            //     <svg class="icon-btn-resend-code" width="20px" height="20px" viewBox="0 0 1024 1024">
+            //       <path d="M752.869 271.058C683.323 201.511 584.763 161.405 476.389 172.498C319.803 188.285 190.949 315.431 173.456 472.018C149.989 678.951 309.989 853.458 511.803 853.458C647.909 853.458 764.816 773.671 819.429 658.898C833.083 630.311 812.603 597.458 781.029 597.458C765.243 597.458 750.309 605.991 743.483 620.071C695.269 723.751 579.643 789.458 453.349 761.298C358.629 740.391 282.256 663.165 262.203 568.445C226.363 402.898 352.229 256.125 511.803 256.125C582.629 256.125 645.776 285.565 691.856 332.071L627.429 396.498C600.549 423.378 619.323 469.458 657.296 469.458H810.469C833.936 469.458 853.136 450.258 853.136 426.791V273.618C853.136 235.645 807.056 216.445 780.176 243.325L752.869 271.058V271.058Z">
+            //       </path>
+            //     </svg>
+            //     <div class="text-btn-resend-code">Reenviar código</div>
+            //   </span>
+            // </button>
           </div>
           <div class="footer-modal-smart-sign-in-v3">
             <button
