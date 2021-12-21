@@ -259,6 +259,7 @@ const sendToken = async email => {
   return response;
 };
 const authToken = (email, token) => {
+  console.log('authToken');
   const response = jQuery.ajax({
     method: 'POST',
     url: `${BASE_URL}/auth/login`,
@@ -268,11 +269,13 @@ const authToken = (email, token) => {
       'customer_data': true
     },
     success: function (responseSendToken) {
-      console.log('Login concluído');
+      console.log('Login concluído=>', responseSendToken);
       return responseSendToken.user;
+    },
+    error: function (error) {
+      console.log('Error occured', error);
+      return false;
     }
-  }).done(function (msg) {
-    console.log('done msg', msg);
   });
   return response;
 };
@@ -386,9 +389,9 @@ const {
 } = __webpack_require__(/*! ./login/login */ "./src/login/login.js");
 
 const {
-  getUserById,
   createdUser,
-  sendToken
+  sendToken,
+  authToken
 } = __webpack_require__(/*! ./services/api */ "./src/services/api.js");
 
 renderNext = () => {
