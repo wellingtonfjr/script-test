@@ -17,7 +17,6 @@ __webpack_require__.r(__webpack_exports__);
 
 function addBoxToOpenModal() {
   console.log('addBoxToOpenModal');
-  jQuery("#boxBuyMoreFaster").remove();
   jQuery("#buyMoreFaster").append(jQuery(`
     <div class="m-bottom-half panel-buy-fast" role="button" tabindex="0" data-testid="panel-buy-fast"
       onClick="openModalLogin()"
@@ -43,6 +42,7 @@ function addBoxToOpenModal() {
 }
 
 const verifyEmailExistWallet = async email => {
+  jQuery("#boxBuyMoreFaster").remove();
   if (!email) return false;
 
   try {
@@ -477,7 +477,9 @@ validateAccessCode = async () => {
     console.log('response getUser', user); // Controller Error CodeConfirmation errorCodeAppWallet
 
     if (responseAuthToken.status === 200) {
+      jQuery("#modalAppWallet").remove();
       window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', user);
+      jQuery("[data-testid|='btnSubmitZipcode']").click();
     } else {
       console.log('error response');
     }
@@ -487,7 +489,7 @@ validateAccessCode = async () => {
 };
 
 openModalLogin = () => {
-  var email = jQuery("[id|='contact.email']").val();
+  var email = jQuery("[id='contact.email']").val();
   sendToken(email);
   jQuery("body").append(jQuery(`
     <div id="modalAppWallet" class="modal fade show">
