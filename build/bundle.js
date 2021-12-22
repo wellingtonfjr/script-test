@@ -421,6 +421,11 @@ registerBlurInputEmail = email => {
   verifyEmailExistWallet(email);
 };
 
+clickOnBtnSubmitZipcode = () => {
+  const btnSubmitZipcode = jQuery("[data-testid|='btnSubmitZipcode']");
+  if (Boolean(btnSubmitZipcode.length)) btnSubmitZipcode.click();
+};
+
 if (typeof window === 'object') {
   window.SDKCheckout.subscribeEvent('RENDER_NEXT', renderNext);
   window.SDKCheckout.subscribeEvent('CLOSE_ORDER', closeOrder);
@@ -486,11 +491,6 @@ validateAccessCode = async () => {
   } else {
     console.log('not Auth Token', responseAuthToken);
   }
-};
-
-clickOnBtnSubmitZipcode = () => {
-  const btnSubmitZipcode = jQuery("[data-testid|='btnSubmitZipcode']");
-  if (Boolean(btnSubmitZipcode.length)) btnSubmitZipcode.click();
 };
 
 openModalLogin = () => {
