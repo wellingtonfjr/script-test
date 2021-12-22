@@ -425,6 +425,7 @@ if (typeof window === 'object') {
   window.SDKCheckout.subscribeEvent('RENDER_NEXT', renderNext);
   window.SDKCheckout.subscribeEvent('CLOSE_ORDER', closeOrder);
   window.SDKCheckout.subscribeEvent('RETURN_VALIDATE_PHONE', updateErrorPhone);
+  window.SDKCheckout.subscribeEvent('CLICK_ON_BTN_SUBMIT_ZIPCODE', clickOnBtnSubmitZipcode);
   phoneLS = window.LS?.cart?.contact?.phone;
 
   window.onload = () => {
@@ -479,13 +480,17 @@ validateAccessCode = async () => {
     if (responseAuthToken.status === 200) {
       jQuery("#modalAppWallet").remove();
       window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', user);
-      jQuery("[data-testid|='btnSubmitZipcode']").click();
     } else {
       console.log('error response');
     }
   } else {
     console.log('not Auth Token', responseAuthToken);
   }
+};
+
+clickOnBtnSubmitZipcode = () => {
+  const btnSubmitZipcode = jQuery("[data-testid|='btnSubmitZipcode']");
+  if (Boolean(btnSubmitZipcode.length)) btnSubmitZipcode.click();
 };
 
 openModalLogin = () => {
