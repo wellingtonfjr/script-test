@@ -551,7 +551,7 @@ openModalLogin = () => {
                   >
                     <label class="input-label" id="code_confirmation" for="code_confirmation">Código de acceso</label>
                 </div>
-                <div id="errorCodeAppWallet" class="error col-12" style="display: block">
+                <div id="errorCodeConfirmationLabel" class="error col-12" style="display: block">
                   <div class="alert alert-danger-bagged">
                     <span></span>
                   </div>
