@@ -497,6 +497,7 @@ validateAccessCode = async () => {
 };
 
 openModalLogin = () => {
+  var email = jQuery("[id='contact.email']").val();
   sendToken();
   jQuery("body").append(jQuery(`
     <div id="modalAppWallet" class="modal fade show">
