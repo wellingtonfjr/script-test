@@ -274,7 +274,7 @@ const authToken = (email, token) => {
     },
     error: function (error) {
       console.log('Error occured', error);
-      return false;
+      return error;
     }
   });
   return response;
@@ -473,6 +473,7 @@ mountUser = userResponse => {
 };
 
 validateAccessCode = async () => {
+  jQuery("#errorCodeConfirmationLabel").css("display", "none");
   var email = jQuery("[id|='contact.email']").val();
   var codeConfirmation = jQuery('#code_confirmation').val();
   console.log('email, codeConfirmation====>', email, codeConfirmation);
@@ -489,6 +490,7 @@ validateAccessCode = async () => {
       console.log('error response');
     }
   } else {
+    jQuery("#errorCodeConfirmationLabel").css("display", "block");
     console.log('not Auth Token', responseAuthToken);
   }
 };
@@ -517,11 +519,19 @@ openModalLogin = () => {
 
         <div class="content-modal-buy-fast">
           <div class="box-resent-code row">
-            <div class="col-12 text-small m-top-none">
+            <div class="col-12 col-sm-8 text-small m-top-none">
               <span class="break-line">
-                Copie y pegue el código de 6 dígitos enviado a <strong>${email}</strong>
+                Compre mais rápido com sua conta Nuvem Pago usando o código enviado para <strong>${email}</strong>
               </span>
             </div>
+            <button type="link" id="" class="col-12 col-sm-4 text-small m-top-none btn-resend-code btn btn-link" tabindex="0" onClick="sendToken(${email})">
+              <span>
+                <svg class="icon-btn-resend-code" width="20px" height="20px" viewBox="0 0 1024 1024">
+                  <path d="M752.869 271.058C683.323 201.511 584.763 161.405 476.389 172.498C319.803 188.285 190.949 315.431 173.456 472.018C149.989 678.951 309.989 853.458 511.803 853.458C647.909 853.458 764.816 773.671 819.429 658.898C833.083 630.311 812.603 597.458 781.029 597.458C765.243 597.458 750.309 605.991 743.483 620.071C695.269 723.751 579.643 789.458 453.349 761.298C358.629 740.391 282.256 663.165 262.203 568.445C226.363 402.898 352.229 256.125 511.803 256.125C582.629 256.125 645.776 285.565 691.856 332.071L627.429 396.498C600.549 423.378 619.323 469.458 657.296 469.458H810.469C833.936 469.458 853.136 450.258 853.136 426.791V273.618C853.136 235.645 807.056 216.445 780.176 243.325L752.869 271.058V271.058Z"></path>
+                </svg>
+                <div class="text-btn-resend-code">Reenviar código</div>
+              </span>
+            </button>
           </div>
           <div class="row">
             <div class="col-12 col-sm-8">
@@ -540,11 +550,10 @@ openModalLogin = () => {
                   >
                     <label class="input-label" id="code_confirmation" for="code_confirmation">Código de acceso</label>
                 </div>
-              </div>
-
-              <div id="errorCodeAppWallet" class="error col-12">
-                <div class="alert alert-danger-bagged">
-                  <span></span>
+                <div id="errorCodeAppWallet" class="error col-12" style="display: block">
+                  <div class="alert alert-danger-bagged">
+                    <span></span>
+                  </div>
                 </div>
               </div>
             </div>
