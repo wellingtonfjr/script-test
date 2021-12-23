@@ -1,7 +1,6 @@
-import { veifyUserExist } from '../services/api'
+import { verifyUserExist } from '../services/api'
 function addBoxToOpenModal () {
   console.log('addBoxToOpenModal')
-  jQuery("#boxBuyMoreFaster").remove()
   jQuery("#buyMoreFaster").append(jQuery(`
     <div class="m-bottom-half panel-buy-fast" role="button" tabindex="0" data-testid="panel-buy-fast"
       onClick="openModalLogin()"
@@ -27,9 +26,10 @@ function addBoxToOpenModal () {
 }
 
 export const verifyEmailExistWallet = async (email) => {
+  jQuery("#boxBuyMoreFaster").remove()
   if (!email) return false
   try {
-    let response = await veifyUserExist(email)
+    let response = await verifyUserExist(email)
   
     if (!response?.registered_email) {
       window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email)

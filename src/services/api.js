@@ -1,9 +1,9 @@
-export const BASE_URL = 'http://localhost:4444/users'
+export const BASE_URL = 'http://localhost:4444'
 
 export const createdUser = (data) => {
   const response = jQuery.ajax({
     method: 'POST',
-    url: 'http://localhost:4444/users/',
+    url: `${BASE_URL}/users`,
     data: data,
     success: function (responseRequest){
       console.log('responseRequest', responseRequest)
@@ -16,10 +16,10 @@ export const createdUser = (data) => {
   return response
 }
 
-export const veifyUserExist = (email) => {
+export const verifyUserExist = (email) => {
   return jQuery.ajax({
     method: 'GET',
-    url: `${BASE_URL}/registered?email=${email}`,
+    url: `${BASE_URL}/users/registered?email=${email}`,
     success: function(data) {
       console.log('success', data)
       return data;
@@ -31,50 +31,48 @@ export const veifyUserExist = (email) => {
   })
 }
 
-export const getUserById = async (id) => {
-  console.log('enter getUserById2')
-  jQuery.support.cors = true;
+export const sendToken = async () => {
+  var email = jQuery("[id='contact.email']").val()
   const response = await jQuery.ajax({
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+    method: 'POST',
+    url: `${BASE_URL}/auth/send-token`,
+    data: { email: email},
+    success: function (responseSendToken){
+      console.log('responseSendToken', responseSendToken)
+      console.log('Token Criado com sucesso')
     },
-    dataType: "application/json",
-    url: `${BASE_URL}/${id}`,
+    error: function(error) {
+      console.log('Error occured', error);
+      return false
+    }
   })
 
-  console.log('response>>>>', response)
-  const keys = [
-    'zipcode',
-    'first_name',
-    'last_name',
-    'address',
-    'number',
-    'floor',
-    'locality',
-    'city',
-    'state',
-    'country',
-    'phone',
-    'between_streets',
-    'reference'
-  ]
-  const addresses = response.address
-  let address = {}
-  let user = {
-    contact_name: response.name,
-    contact_phone: response.phone,
-    // contact_accepts_marketing: true,
-  }
-  addresses.map(item => {
-    keys.map((key) => {
-      address = {
-        ...address, [`${item.type}_${key}`]: `${item[key]}` || null
-      }
-      return true
-    })    
+  return response
+}
+
+export const authToken = (email, token) => {
+  console.log('authToken')
+  const response = jQuery.ajax({
+    method: 'POST',
+    url: `${BASE_URL}/auth/login`,
+    data: {
+      email: email,
+      otp: token,
+      'customer_data': true
+    },
+    success: function (responseSendToken){
+      console.log('Login concluído=>', responseSendToken)
+      return responseSendToken.user
+    },
+    error: function(error) {
+      console.log('Error occured', error);
+      return error
+    }
   })
-  console.log('returned===>', { user, ...address })
-  console.log('finish getUserById')
-  return  { code: 200, user: { ...user, ...address }}
+
+  return response
+}
+
+export const authLogin = () => {
+
 }
