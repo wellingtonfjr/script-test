@@ -486,6 +486,7 @@ validateAccessCode = async () => {
 
     if (responseAuthToken.status === 200) {
       jQuery("#modalAppWallet").remove();
+      jQuery("#buyMoreFaster").remove();
       window.SDKCheckout.publishEvent('RETURN_CUSTOMER_ADDRESS', user);
     } else {
       console.log('error response');
