@@ -395,23 +395,27 @@ const {
   authToken
 } = __webpack_require__(/*! ./services/api */ "./src/services/api.js");
 
-renderNext = () => {
-  console.log('renderNext=>'); // const response = veifyUserExist(window.LS?.cart?.contact?.)
-
-  renderBoxOptinWallet();
+renderNext = async () => {
+  console.log('renderNext=>');
+  const response = await veifyUserExist(window.LS?.cart?.contact?.email);
+  if (response?.registered_email) renderBoxOptinWallet();
 };
 
-closeOrder = (event, data) => {
-  const isAcceptWallet = jQuery('#isAcceptWallet')[0].checked || false;
-  const phoneWallet = jQuery('#phoneWallet').val();
-  console.log('closeOrder data=>', data);
+closeOrder = async (event, data) => {
+  const response = await veifyUserExist(window.LS?.cart?.contact?.email);
 
-  if (isAcceptWallet) {
-    const response = createdUser(data);
-    console.log('response Created', response);
+  if (response?.registered_email) {
+    const isAcceptWallet = jQuery('#isAcceptWallet')[0].checked || false;
+    const phoneWallet = jQuery('#phoneWallet').val();
+    console.log('closeOrder data=>', data);
+
+    if (isAcceptWallet) {
+      const response = createdUser(data);
+      console.log('response Created', response);
+    }
+
+    console.log('Cadastro do email: ', isAcceptWallet, 'e telefone: ', phoneWallet);
   }
-
-  console.log('Cadastro do email: ', isAcceptWallet, 'e telefone: ', phoneWallet);
 };
 
 updateErrorPhone = (event, isValidPhone) => {
