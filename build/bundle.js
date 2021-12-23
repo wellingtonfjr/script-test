@@ -555,11 +555,11 @@ openModalLogin = () => {
                     value=""
                   >
                     <label class="input-label" id="code_confirmation" for="code_confirmation">Código de acceso</label>
-                </div>
-                <div id="errorCodeConfirmationLabel" class="error col-12" style="display: block">
-                  <div class="alert alert-danger-bagged">
-                    <span></span>
-                  </div>
+                    <div id="errorCodeConfirmationLabel" class="error col-12" style="display: none">
+                      <div class="alert alert-danger-bagged">
+                        <span></span>
+                      </div>
+                    </div>
                 </div>
               </div>
             </div>
