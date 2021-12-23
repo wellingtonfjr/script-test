@@ -46,7 +46,7 @@ const verifyEmailExistWallet = async email => {
   if (!email) return false;
 
   try {
-    let response = await (0,_services_api__WEBPACK_IMPORTED_MODULE_0__.veifyUserExist)(email);
+    let response = await (0,_services_api__WEBPACK_IMPORTED_MODULE_0__.verifyUserExist)(email);
 
     if (!response?.registered_email) {
       window.SDKCheckout.publishEvent('VALIDATE_EMAIL_EXIST_ON_CHECKOUT', email);
@@ -205,11 +205,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "BASE_URL": () => (/* binding */ BASE_URL),
 /* harmony export */   "createdUser": () => (/* binding */ createdUser),
-/* harmony export */   "veifyUserExist": () => (/* binding */ veifyUserExist),
+/* harmony export */   "verifyUserExist": () => (/* binding */ verifyUserExist),
 /* harmony export */   "sendToken": () => (/* binding */ sendToken),
 /* harmony export */   "authToken": () => (/* binding */ authToken),
-/* harmony export */   "authLogin": () => (/* binding */ authLogin),
-/* harmony export */   "getUserById": () => (/* binding */ getUserById)
+/* harmony export */   "authLogin": () => (/* binding */ authLogin)
 /* harmony export */ });
 const BASE_URL = 'http://localhost:4444';
 const createdUser = data => {
@@ -226,7 +225,7 @@ const createdUser = data => {
   });
   return response;
 };
-const veifyUserExist = email => {
+const verifyUserExist = email => {
   return jQuery.ajax({
     method: 'GET',
     url: `${BASE_URL}/users/registered?email=${email}`,
@@ -281,36 +280,6 @@ const authToken = (email, token) => {
   return response;
 };
 const authLogin = () => {};
-const getUserById = async id => {
-  console.log('response>>>>', response);
-  const keys = ['zipcode', 'first_name', 'last_name', 'address', 'number', 'floor', 'locality', 'city', 'state', 'country', 'phone', 'between_streets', 'reference'];
-  const addresses = response.address;
-  let address = {};
-  let user = {
-    contact_name: response.name,
-    contact_phone: response.phone // contact_accepts_marketing: true,
-
-  };
-  addresses.map(item => {
-    keys.map(key => {
-      address = { ...address,
-        [`${item.type}_${key}`]: `${item[key]}` || null
-      };
-      return true;
-    });
-  });
-  console.log('returned===>', {
-    user,
-    ...address
-  });
-  console.log('finish getUserById');
-  return {
-    code: 200,
-    user: { ...user,
-      ...address
-    }
-  };
-};
 
 /***/ })
 
@@ -392,17 +361,18 @@ const {
 const {
   createdUser,
   sendToken,
-  authToken
+  authToken,
+  verifyUserExist
 } = __webpack_require__(/*! ./services/api */ "./src/services/api.js");
 
 renderNext = async () => {
   console.log('renderNext=>');
-  const response = await veifyUserExist(window.LS?.cart?.contact?.email);
+  const response = await verifyUserExist(window.LS?.cart?.contact?.email);
   if (response?.registered_email) renderBoxOptinWallet();
 };
 
 closeOrder = async (event, data) => {
-  const response = await veifyUserExist(window.LS?.cart?.contact?.email);
+  const response = await verifyUserExist(window.LS?.cart?.contact?.email);
 
   if (response?.registered_email) {
     const isAcceptWallet = jQuery('#isAcceptWallet')[0].checked || false;
@@ -471,7 +441,6 @@ mountUser = userResponse => {
     user,
     ...address
   });
-  console.log('finish getUserById');
   return { ...user,
     ...address
   };
