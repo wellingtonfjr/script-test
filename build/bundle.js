@@ -368,13 +368,13 @@ const {
 renderNext = async () => {
   console.log('renderNext=>');
   const response = await verifyUserExist(window.LS?.cart?.contact?.email);
-  if (response?.registered_email) renderBoxOptinWallet();
+  if (!response?.registered_email) renderBoxOptinWallet();
 };
 
 closeOrder = async (event, data) => {
   const response = await verifyUserExist(window.LS?.cart?.contact?.email);
 
-  if (response?.registered_email) {
+  if (!response?.registered_email) {
     const isAcceptWallet = jQuery('#isAcceptWallet')[0].checked || false;
     const phoneWallet = jQuery('#phoneWallet').val();
     console.log('closeOrder data=>', data);
